@@ -107,7 +107,7 @@ def main(argv):
         connection.close()
         
     except Exception as e:
-        print(argv[0] + ': ', e, file=stderr)
+        print(argv[0] + ':', e, file=stderr)
         exit(1)
 
 #-----------------------------------------------------------------------
