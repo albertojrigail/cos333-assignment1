@@ -15,7 +15,7 @@ def testRegDetails(courseid):
     # reference test.reg
     system("python testreg.py " + courseid + " &>out3")
     # student test.reg
-    system("python /u/cos333/Asgt1Solution/ref_testreg.pyc " + courseid + " &>out4")
+    system("python /u/cos333/Asgt1Solution/ref_regdetails.pyc " + courseid + " &>out4")
     system("diff out3 out4")
     system("rm -rf out3 out4")
 
