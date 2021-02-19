@@ -34,7 +34,7 @@ def main(argv):
         cursor = connection.cursor()
 
         # create a prepared statement and substitute values.
-        stmtStr = 'SELECT courseid, days, starttime, endtime, bldg, roomnum, area, title, descrip, prereqs ' + \
+        stmtStr = 'SELECT classes.courseid, days, starttime, endtime, bldg, roomnum, area, title, descrip, prereqs ' + \
             'FROM classes, courses WHERE classes.courseid = courses.courseid AND classes.classid = ?'
         cursor.execute(stmtStr, [classid])
         
