@@ -72,7 +72,7 @@ def main(argv):
             row = cursor.fetchone()
         
         # format print statements
-        print("Course Id:", classid, end="\n\n")
+        print("Course Id:", courseid, end="\n\n")
         print("Days:", days)
         print("Start time:", starttime)
         print("End time:", endtime)
