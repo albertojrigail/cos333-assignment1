@@ -87,8 +87,10 @@ def main(argv):
         profs = []
         row = cursor.fetchone()
         while row is not None:
-            profs.append(row[0])
+            current = row[0]
+            profs.append(current)
             row = cursor.fetchone()
+        print(profs)
          
         # format print statements
         print("Course Id:", courseid, end="\n\n")
