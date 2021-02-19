@@ -46,7 +46,7 @@ def main(argv):
         # get all fields except profname, and departments
         row = cursor.fetchone()
         if row is None:
-            print(argv[0], ": No class has the specified classid", file=stderr)
+            print(argv[0] + ":", "No class has the specified classid", file=stderr)
             exit(1)
         
         courseid = str(row[0])
@@ -120,7 +120,7 @@ def main(argv):
         connection.close()
         
     except Exception as e:
-        print(argv[0] + ':', e, file=stderr)
+        print(argv[0] + ': ', e, file=stderr)
         exit(1)
 
 #-----------------------------------------------------------------------
