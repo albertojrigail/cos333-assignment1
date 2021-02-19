@@ -19,7 +19,8 @@ def testReg(flags):
     system("python /u/cos333/Asgt1Solution/ref_reg.pyc " + args + " &>out2")
     system("diff out1 out2")
 
-def main(argv):       
+def main(argv):
+    # standard tests       
     testReg("-h")
     testReg("python reg.py")
     testReg("-d COS")
@@ -38,6 +39,12 @@ def main(argv):
     testReg("-t ' Independent Study'")
     testReg("-t '  Independent Study'")
     testReg("-t=-c")
+
+    # not accessing the database properly
+    system('mv reg.sqlite ..')
+    testReg("python reg.py")
+    testReg("-t intro")
+    system('mv ../reg.sqlite .')
 
 #-----------------------------------------------------------------------
 
