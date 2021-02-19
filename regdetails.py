@@ -89,7 +89,7 @@ def main(argv):
         while row is not None:
             profs.append(row[0])
             row = cursor.fetchone()
-        
+         
         # format print statements
         print("Course Id:", courseid, end="\n\n")
         print("Days:", days)
@@ -101,7 +101,7 @@ def main(argv):
         # dept and number
         dptnum = "Dept and Number: " + listToString(depts)
         printWrapped(dptnum)
-        print("",end="\n\n")
+        print("")
 
         # Area
         print("Area:", area, end="\n\n")
