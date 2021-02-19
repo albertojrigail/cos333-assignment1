@@ -82,7 +82,7 @@ def main(argv):
 
         # get profname
         stmStr = 'SELECT profname FROM coursesprofs, profs ' + \
-            'WHERE coursesprofs.profid = profs.profid AND coursesprofs.courseid = ?'
+            'WHERE coursesprofs.profid = profs.profid AND courseid = ?'
         cursor.execute(stmtStr, [courseid])
         profs = []
         row = cursor.fetchone()
@@ -108,20 +108,19 @@ def main(argv):
 
         # title
         printWrapped("Title: " + title)
-        print("",end="\n\n")
+        print("")
 
         # Description
         printWrapped("Description: " + descrip)
-        print("", end="\n\n")
+        print("")
 
         # prereqs
         printWrapped("Prerequisites: " + prereqs)
-        print("", end="\n\n")
+        print("")
 
         # professors
         profsStr = "Professor: " + listToString(profs)
         printWrapped(profsStr)
-        print("")
         
         # finish (good practice)
         cursor.close()
