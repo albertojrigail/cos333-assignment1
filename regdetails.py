@@ -57,7 +57,8 @@ def main(argv):
         prereqs = str(row[9])
 
         # get departments and coursenums
-        stmtStr = 'SELECT dept, coursenum FROM crosslistings WHERE courseid = ?'
+        stmtStr = 'SELECT dept, coursenum FROM crosslistings WHERE courseid = ? ' + \
+                    'ORDER BY dept, coursenum'
         cursor.execute(stmtStr, [courseid])
         depts = []
         row = cursor.fetchone()
@@ -68,7 +69,8 @@ def main(argv):
 
         # get profname
         stmtStr = 'SELECT profname FROM coursesprofs, profs ' + \
-            'WHERE coursesprofs.profid = profs.profid AND courseid = ?'
+            'WHERE coursesprofs.profid = profs.profid AND courseid = ? ' +\
+                "ORDER BY profname"
         cursor.execute(stmtStr, [courseid])
         profs = []
         row = cursor.fetchone()
