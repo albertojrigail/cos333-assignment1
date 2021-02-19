@@ -16,6 +16,7 @@ def testReg(flags):
     # student test.reg
     system("python /u/cos333/Asgt1Solution/ref_reg.pyc " + flags + " &>out2")
     system("diff out1 out2")
+    system("rm -rf out1 out2")
 
 def main(argv):
     # standard tests       
