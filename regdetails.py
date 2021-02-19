@@ -100,8 +100,8 @@ def main(argv):
         print("Room:", roomnum, end="\n\n")
 
         # dept and number
-        dptnum = "Dept and Number: " + listToString(depts)
-        printWrapped(dptnum)
+        for i in range(len(depts)):
+            printWrapped( "Dept and Number: " + depts[i])
         print("")
 
         # Area
@@ -120,8 +120,9 @@ def main(argv):
         print("")
 
         # professors
-        profsStr = "Professor: " + listToString(profs)
-        printWrapped(profsStr)
+        for i in range(len(depts)):
+            printWrapped("Professor: " + profs[i])
+        print("")
         
         # finish (good practice)
         cursor.close()
