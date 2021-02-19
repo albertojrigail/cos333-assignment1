@@ -13,11 +13,11 @@ from sqlite3 import connect
 #-----------------------------------------------------------------------
 def testRegDetails(courseid):
     # reference test.reg
-    system("python testreg.py " + courseid + " &>out1")
+    system("python testreg.py " + courseid + " &>out3")
     # student test.reg
-    system("python /u/cos333/Asgt1Solution/ref_testreg.pyc " + courseid + " &>out2")
-    system("diff out1 out2")
-    system("rm -rf out1 out2")
+    system("python /u/cos333/Asgt1Solution/ref_testreg.pyc " + courseid + " &>out4")
+    system("diff out3 out4")
+    system("rm -rf out3 out4")
 
 def main(argv):
     DATABASE_NAME = 'reg.sqlite'
@@ -29,7 +29,7 @@ def main(argv):
     try:
         connection = connect(DATABASE_NAME)
         cursor = connection.cursor()
-        cursor.execute("SELECT classid from classes")
+        cursor.execute("SELECT classid from classes ORDER BY classid")
 
         row = cursor.fetchone()
         while row is not None:
