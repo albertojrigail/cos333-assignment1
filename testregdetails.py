@@ -13,7 +13,7 @@ from sqlite3 import connect
 #-----------------------------------------------------------------------
 def testRegDetails(courseid):
     # reference test.reg
-    system("python testreg.py " + courseid + " &>out3")
+    system("python regdetails.py " + courseid + " &>out3")
     # student test.reg
     system("python /u/cos333/Asgt1Solution/ref_regdetails.pyc " + courseid + " &>out4")
     system("diff out3 out4")
