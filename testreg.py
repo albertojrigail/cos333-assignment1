@@ -4,7 +4,6 @@
 # testreg.py
 # Author: Alberto Rigail
 # Description: this program tests reg.py,
-#              and creates the coverage report 
 #-----------------------------------------------------------------------
 
 from os import system
@@ -12,11 +11,10 @@ from sys import argv, stderr, exit
 
 #-----------------------------------------------------------------------
 def testReg(flags):
-    args = "-h"
     # reference test.reg
-    system("python reg.py " + args + " &>out1")
+    system("python reg.py " + flags + " &>out1")
     # student test.reg
-    system("python /u/cos333/Asgt1Solution/ref_reg.pyc " + args + " &>out2")
+    system("python /u/cos333/Asgt1Solution/ref_reg.pyc " + flags + " &>out2")
     system("diff out1 out2")
 
 def main(argv):
