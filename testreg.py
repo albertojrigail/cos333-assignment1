@@ -21,6 +21,23 @@ def testReg(flags):
 
 def main(argv):       
     testReg("-h")
+    testReg("python reg.py")
+    testReg("-d COS")
+    testReg("-n 333")
+    testReg("-n b")
+    testReg("-a Qr")
+    testReg("-t intro")
+    testReg("-t science")
+    testReg("-t C_S")
+    testReg("-t c%S")
+    testReg("-d cos -n 3")
+    testReg("-d cos -a qr -n 2 -t intro")
+    testReg("-t 'Independent Study'")
+    testReg("-t 'Independent Study '")
+    testReg("-t 'Independent Study  '")
+    testReg("-t ' Independent Study'")
+    testReg("-t '  Independent Study'")
+    testReg("-t=-c")
 
 #-----------------------------------------------------------------------
 
