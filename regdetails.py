@@ -71,8 +71,8 @@ def main(argv):
         prereqs = str(row[9])
 
         # get departments and coursenums
-        stmStr = 'SELECT dept, coursenum FROM crosslistings WHERE courseid = ?'
-        cursor.execute(stmStr, [courseid])
+        stmtStr = 'SELECT dept, coursenum FROM crosslistings WHERE courseid = ?'
+        cursor.execute(stmtStr, [courseid])
         depts = []
         row = cursor.fetchone()
         while row is not None:
@@ -81,12 +81,11 @@ def main(argv):
             row = cursor.fetchone()
 
         # get profname
-        stmStr = 'SELECT profname FROM coursesprofs, profs ' + \
+        stmtStr = 'SELECT profname FROM coursesprofs, profs ' + \
             'WHERE coursesprofs.profid = profs.profid AND courseid = ?'
         cursor.execute(stmtStr, [courseid])
         profs = []
         row = cursor.fetchone()
-        print(row)
         while row is not None:
             current = row[0]
             profs.append(current)
