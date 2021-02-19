@@ -106,7 +106,7 @@ def main(argv):
         print("")
 
         # professors
-        for i in range(len(depts)):
+        for i in range(len(profs)):
             printWrapped("Professor: " + profs[i])
         print("")
         
