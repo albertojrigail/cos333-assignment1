@@ -14,7 +14,7 @@ from sys import argv, stderr, exit
 def testReg(flags):
     args = "-h"
     # reference test.reg
-    system("python -m coverage run -p reg.py " + args + " &>out1")
+    system("python reg.py " + args + " &>out1")
     # student test.reg
     system("python /u/cos333/Asgt1Solution/ref_reg.pyc " + args + " &>out2")
     system("diff out1 out2")
@@ -39,12 +39,6 @@ def main(argv):
     testReg("-t ' Independent Study'")
     testReg("-t '  Independent Study'")
     testReg("-t=-c")
-
-    # not accessing the database properly
-    system('mv reg.sqlite ..')
-    testReg("python reg.py")
-    testReg("-t intro")
-    system('mv ../reg.sqlite .')
 
 #-----------------------------------------------------------------------
 
