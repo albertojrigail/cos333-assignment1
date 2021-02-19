@@ -12,6 +12,25 @@ import argparse
 import textwrap 
 
 #-----------------------------------------------------------------------
+def listToString(list):
+    string = ""
+    if len(list) == 0:
+        return ""
+    if len(list) == 1:
+        return list[0]
+    else:
+        string += list[0]
+        for i in range(1, len(list)):
+            if i == len(list) - 1:
+                string += " and " + list[i]
+            else:
+                string += ", " + list[i]
+
+def printWrapped(string):
+    wrapper = textwrap.TextWrapper(width=72)
+    lines = wrapper.wrap(string)
+    for i in range(len(lines)):
+        print(lines[i])
 
 def main(argv):       
     
@@ -80,42 +99,28 @@ def main(argv):
         print("Room:", roomnum, end="\n\n")
 
         # dept and number
-        print("Dept and Number:", end="")
-        print(" ", depts[0])
-        for i in range(1, len(depts)):
-            if i == len(depts) - 1:
-                print(" and ", depts[i], end="")
-            else:
-                print(", ", depts[i], end="")
-        print("")
+        dptnum = "Dept and Number: " + listToString(depts)
+        printWrapped(dptnum)
+        print("",end="\n\n")
 
         # Area
         print("Area:", area, end="\n\n")
 
         # title
-        wrapper = textwrap.TextWrapper(width=72)
-        title = "Title: " + title
-        titleLines = wrapper.wrap(title)
-        for i in range(len(titleLines)):
-            print(titleLines[i])
+        printWrapped("Title: " + title)
+        print("",end="\n\n")
 
         # Description
-        descrip = "Description: " + descrip
-        descripLines = wrapper.wrap(descrip)
-        for i in range(len(descripLines)):
-            print(descripLines[i])
+        printWrapped("Description: " + descrip)
+        print("", end="\n\n")
 
         # prereqs
-        print("Prerequisites:", prereqs, end="\n\n")
+        printWrapped("Prerequisites: " + prereqs)
+        print("", end="\n\n")
 
         # professors
-        print("Professor:", end="")
-        print(" ", profs[0])
-        for i in range(1, len(profs)):
-            if i == len(profs) - 1:
-                print(" and ", profs[i], end="")
-            else:
-                print(", ", profs[i], end="")
+        profsStr = "Professor: " + listToString(profs)
+        printWrapped(profsStr)
         print("")
         
         # finish (good practice)
