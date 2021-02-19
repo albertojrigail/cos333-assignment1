@@ -33,7 +33,7 @@ def main(argv):
 
         row = cursor.fetchone()
         while row is not None:
-            testRegDetails(row[0])
+            testRegDetails(str(row[0]))
             row = cursor.fetchone()
 
         # finish (good practice)
