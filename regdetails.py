@@ -32,7 +32,7 @@ def main(argv):
 
     # check if database is in current directory
     if not path.isfile(DATABASE_NAME):
-       print('Database connection failed', file=stderr)
+       print(argv[0], ': Database connection failed', file=stderr)
        exit(1)       
     try:
         connection = connect(DATABASE_NAME)
@@ -46,7 +46,9 @@ def main(argv):
         # get all fields except profname, and departments
         row = cursor.fetchone()
         if row is None:
-            return
+            print(argv[0], ": No class has the specified classid", file=stderr)
+            exit(1)
+        
         courseid = str(row[0])
         days = str(row[1])
         starttime = str(row[2])
@@ -118,7 +120,7 @@ def main(argv):
         connection.close()
         
     except Exception as e:
-        print(e, file=stderr)
+        print(argv[0] + ':', e, file=stderr)
         exit(1)
 
 #-----------------------------------------------------------------------

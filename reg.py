@@ -42,7 +42,7 @@ def main(argv):
 
     # check if database is in current directory
     if not path.isfile(DATABASE_NAME):
-       print('Database connection failed', file=stderr)
+       print(argv[0], ': Database connection failed', file=stderr)
        exit(1)       
     try:
         connection = connect(DATABASE_NAME)
@@ -107,7 +107,7 @@ def main(argv):
         connection.close()
         
     except Exception as e:
-        print(e, file=stderr)
+        print(argv[0] + ':', e, file=stderr)
         exit(1)
 
 #-----------------------------------------------------------------------
