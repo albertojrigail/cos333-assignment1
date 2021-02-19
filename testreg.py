@@ -16,7 +16,7 @@ def testReg(flags):
     # reference test.reg
     system("python -m coverage run -p reg.py " + args + " &>out1")
     # student test.reg
-    system("python -m coverage run -p /u/cos333/Asgt1Solution/ref_reg.pyc " + args + " &>out2")
+    system("python /u/cos333/Asgt1Solution/ref_reg.pyc " + args + " &>out2")
     system("diff out1 out2")
 
 def main(argv):       
