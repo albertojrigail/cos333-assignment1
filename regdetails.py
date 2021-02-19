@@ -12,20 +12,6 @@ import argparse
 import textwrap 
 
 #-----------------------------------------------------------------------
-def listToString(list):
-    string = ""
-    if len(list) == 0:
-        return ""
-    if len(list) == 1:
-        return list[0]
-    else:
-        string += list[0]
-        for i in range(1, len(list)):
-            if i == len(list) - 1:
-                string += " and " + list[i]
-            else:
-                string += ", " + list[i]
-
 def printWrapped(string):
     wrapper = textwrap.TextWrapper(width=72)
     lines = wrapper.wrap(string)
