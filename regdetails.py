@@ -86,11 +86,11 @@ def main(argv):
         cursor.execute(stmtStr, [courseid])
         profs = []
         row = cursor.fetchone()
+        print(row)
         while row is not None:
             current = row[0]
             profs.append(current)
             row = cursor.fetchone()
-        print(profs)
          
         # format print statements
         print("Course Id:", courseid, end="\n\n")
