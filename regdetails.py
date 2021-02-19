@@ -108,7 +108,6 @@ def main(argv):
         # professors
         for i in range(len(profs)):
             printWrapped("Professor: " + profs[i])
-        print("")
         
         # finish (good practice)
         cursor.close()
