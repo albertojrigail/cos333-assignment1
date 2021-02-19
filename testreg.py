@@ -17,7 +17,7 @@ def testReg(flags):
     system("python reg.py " + args + " &>out1")
     # student test.reg
     system("python /u/cos333/Asgt1Solution/ref_reg.pyc " + args + " &>out2")
-    system("diff -y out1 out2")
+    system("diff out1 out2")
 
 def main(argv):       
     testReg("-h")
