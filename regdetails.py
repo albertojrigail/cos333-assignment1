@@ -45,6 +45,8 @@ def main(argv):
         
         # get all fields except profname, and departments
         row = cursor.fetchone()
+        if row is None:
+            return
         courseid = str(row[0])
         days = str(row[1])
         starttime = str(row[2])
