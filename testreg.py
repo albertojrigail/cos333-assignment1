@@ -12,7 +12,7 @@ from sys import argv, stderr, exit
 #-----------------------------------------------------------------------
 def testReg(flags):
     # reference test.reg
-    system("python reg.py " + flags + " &>out1")
+    system("python -m coverage run -p reg.py " + flags + " &>out1")
     # student test.reg
     system("python /u/cos333/Asgt1Solution/ref_reg.pyc " + flags + " &>out2")
     system("diff out1 out2")

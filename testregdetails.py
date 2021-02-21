@@ -13,7 +13,7 @@ from sqlite3 import connect
 #-----------------------------------------------------------------------
 def testRegDetails(courseid):
     # reference test.reg
-    system("python regdetails.py " + courseid + " &>out3")
+    system("python -m coverage run -p regdetails.py " + courseid + " &>out3")
     # student test.reg
     system("python /u/cos333/Asgt1Solution/ref_regdetails.pyc " + courseid + " &>out4")
     system("diff out3 out4")
@@ -32,10 +32,17 @@ def main(argv):
         cursor.execute("SELECT classid from classes ORDER BY classid")
 
         row = cursor.fetchone()
+        i = 0
         while row is not None:
             print("test:", str(row[0]))
             testRegDetails(str(row[0]))
             row = cursor.fetchone()
+            if i == 20:
+                break
+
+        # edge cases
+        testRegDetails("8111 18")
+        testRegDetails("")
 
         # finish (good practice)
         cursor.close()
