@@ -1,0 +1,29 @@
+ajrc
+
+Name: Alberto Rigail
+
+Assigment No: 1
+
+Contribution:
+I worked solo on this assignment, by coding reg.py and regdetails.py as specified in the course website. reg.py start by parsing arguments using argparse (sending errors when needed). Then, it creates a SQL prepared statement that is customized to the optional arguments received (using string concatenation). It then checks whether the database is in the current directory, and if so, queries the data. The program ends by printing out the classes that match the search, using the text wrap library for proper formatting.
+
+regdetails.py has a similar execution, except that it does a more complex query for getting all the columns needed. Note that if the id given to the program does not match to a valid classid, regdetails.py yields an error message and returns. Otherwise, the data is fetched and printed in the specified format.
+
+For testing, I wrote automated test files testreg.py and testregdetails.py, that compare the output of reg.py and regdetails.py with their respective reference programs. I used the system module and diff command for these comparisons, which prints the differences to stdout. These automated tests also perform coverage testing for the regular cases, and I finished coverage for boundary tests by writing the commands on the terminal.
+
+External help:
+I received no external help in this assignment.
+
+Sources referenced:
+In this assignment, I followed the course policies and guidelines for referencing external information. Moreover, I used the following sources:
+- Python Documentation
+- https://www.geeksforgeeks.org/textwrap-text-wrapping-filling-python/
+- https://www.geeksforgeeks.org/convert-integer-to-string-in-python/
+- https://towardsdatascience.com/learn-enough-python-to-be-useful-argparse-e482e1764e05
+- https://www.w3schools.com/sql/sql_like.asp
+- https://www.journaldev.com/23763/python-remove-spaces-from-string
+
+Time spent in this assignment: 10 hours
+
+My assessment:
+Before taking this course, I had no experience in SQL databases and their use with python. This assignment thus resulted incredibly helpful not only to understand the relations between different tables in a database, but also to learn best practices in querying information from them. It was also helpful to learn modules such as textwrap and argparse, which I will use in future programs. I think this assignment serves its purpose fittingly and I wouldn't change anything for future years.
