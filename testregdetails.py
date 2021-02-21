@@ -37,6 +37,7 @@ def main(argv):
             print("test:", str(row[0]))
             testRegDetails(str(row[0]))
             row = cursor.fetchone()
+            i = i + 1
             if i == 20:
                 break
 
