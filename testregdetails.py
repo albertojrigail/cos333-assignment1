@@ -54,10 +54,6 @@ def main(argv):
         print(e, file=stderr)
         exit(1)
 
-
-    # test all classes
-    testRegDetails()
-
 #-----------------------------------------------------------------------
 
 if __name__ == '__main__':
