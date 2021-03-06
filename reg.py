@@ -19,16 +19,16 @@ def main(argv):
 
     # set up argparse with optional arguments
     parser = argparse.ArgumentParser(description="Registrar application: show overviews of classes", allow_abbrev=False)
-    parser.add_argument('-d', metavar='dept', type=str, help="show only those classes whose department contains dept")
-    parser.add_argument('-n', metavar='num', type=str, help="show only those classes whose course number contains num")
-    parser.add_argument('-a', metavar='area', type=str, help="show only those classes whose distrib area contains area")
-    parser.add_argument('-t', metavar='title', type=str, help="show only those classes whose course title contains title")
+    parser.add_argument('-d', metavar='dept', type=str, help="show only those classes whose department contains dept", nargs=1)
+    parser.add_argument('-n', metavar='num', type=str, help="show only those classes whose course number contains num", nargs=1)
+    parser.add_argument('-a', metavar='area', type=str, help="show only those classes whose distrib area contains area", nargs=1)
+    parser.add_argument('-t', metavar='title', type=str, help="show only those classes whose course title contains title", nargs=1)
     
     # text wrapper
     formattedArguments = []
     for i in range(1, len(argv)):
         # only remove whitespace if argument is -option (odd)
-        if i%2 != 0:
+        if i%2 == 0:
             formattedArguments.append(argv[i].strip())
         else:
             formattedArguments.append(argv[i])
@@ -42,7 +42,7 @@ def main(argv):
 
     # check if database is in current directory
     if not path.isfile(DATABASE_NAME):
-       print(argv[0] + ':', 'Database connection failed', file=stderr)
+       print(argv[0], ': database reg.sqlite not found', file=stderr)
        exit(1)       
     try:
         connection = connect(DATABASE_NAME)

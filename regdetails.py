@@ -24,7 +24,7 @@ def main(argv):
 
     # set up argparse with optional arguments
     parser = argparse.ArgumentParser(description="Registrar application: show details about a class")
-    parser.add_argument('classid', type=int, help="the id of the class whose details should be shown")
+    parser.add_argument('classid', type=int, help="the id of the class whose details should be shown", nargs=1)
 
     # parse arguments
     arguments = parser.parse_args(argv[1:])
@@ -32,7 +32,7 @@ def main(argv):
 
     # check if database is in current directory
     if not path.isfile(DATABASE_NAME):
-       print(argv[0], ': Database connection failed', file=stderr)
+       print(argv[0], ': database reg.sqlite not found', file=stderr)
        exit(1)       
     try:
         connection = connect(DATABASE_NAME)
@@ -46,7 +46,7 @@ def main(argv):
         # get all fields except profname, and departments
         row = cursor.fetchone()
         if row is None:
-            print(argv[0] + ":", "no class has the specified classid", file=stderr)
+            print(argv[0] + ":", "no class with classid " + classid + " exists", file=stderr)
             exit(1)
         
         courseid = str(row[0])
