@@ -25,7 +25,7 @@ def main(argv):
     parser.add_argument('-t', metavar='title', type=str, help="show only those classes whose course title contains title", nargs=1)
     
     # parse arguments
-    arguments = parser.parse_args()
+    arguments = parser.parse_args(argv[1:])
     dept = arguments.d
     num = arguments.n
     area = arguments.a
