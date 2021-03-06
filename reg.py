@@ -24,8 +24,17 @@ def main(argv):
     parser.add_argument('-a', metavar='area', type=str, help="show only those classes whose distrib area contains area", nargs=1)
     parser.add_argument('-t', metavar='title', type=str, help="show only those classes whose course title contains title", nargs=1)
     
+    # text wrapper
+    formattedArguments = []
+    for i in range(1, len(argv)):
+        # only remove whitespace if argument is -option (odd)
+        if i%2 != 0:
+            formattedArguments.append(argv[i].strip())
+        else:
+            formattedArguments.append(argv[i])
+
     # parse arguments
-    arguments = parser.parse_args(argv[1:])
+    arguments = parser.parse_args(formattedArguments)
     dept = arguments.d
     num = arguments.n
     area = arguments.a
