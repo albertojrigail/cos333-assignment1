@@ -28,7 +28,7 @@ def main(argv):
 
     # parse arguments
     arguments = parser.parse_args(argv[1:])
-    classid = arguments.classid
+    classid = arguments.classid[0]
 
     # check if database is in current directory
     if not path.isfile(DATABASE_NAME):
