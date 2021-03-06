@@ -11,12 +11,14 @@ from sys import argv, stderr, exit
 
 #-----------------------------------------------------------------------
 def testReg(flags):
+    print("Test flags: " + flags)
     # reference test.reg
     system("python reg.py " + flags + " &>out1")
     # student test.reg
     system("python /u/cos333/Asgt1Solution/ref_reg.pyc " + flags + " &>out2")
     system("diff out1 out2")
     system("rm -rf out1 out2")
+    print("")
 
 def main(argv):
     # standard tests       
