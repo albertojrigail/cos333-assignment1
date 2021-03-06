@@ -32,7 +32,7 @@ def main(argv):
 
     # check if database is in current directory
     if not path.isfile(DATABASE_NAME):
-       print(argv[0], ': database reg.sqlite not found', file=stderr)
+       print(argv[0] + ': database reg.sqlite not found', file=stderr)
        exit(1)       
     try:
         connection = connect(DATABASE_NAME)
@@ -46,7 +46,7 @@ def main(argv):
         # get all fields except profname, and departments
         row = cursor.fetchone()
         if row is None:
-            print(argv[0] + ":", "no class with classid " + classid + " exists", file=stderr)
+            print(argv[0] + ": no class with classid " + classid + " exists", file=stderr)
             exit(1)
         
         courseid = str(row[0])
