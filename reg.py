@@ -25,16 +25,7 @@ def main(argv):
     parser.add_argument('-t', metavar='title', type=str, help="show only those classes whose course title contains title", nargs=1)
     
     # parse arguments
-        # text wrapper
-    formattedArguments = []
-    for i in range(1, len(argv)):
-        # only remove whitespace if argument is -option (odd)
-        if i%2 != 0:
-            formattedArguments.append(argv[i].strip())
-        else:
-            formattedArguments.append(argv[i])
-
-    arguments = parser.parse_args(formattedArguments)
+    arguments = parser.parse_args()
     dept = arguments.d
     num = arguments.n
     area = arguments.a
@@ -58,16 +49,16 @@ def main(argv):
         optionalArguments = []
         if(dept is not None):
             stmtStr = stmtStr + ' AND INSTR(LOWER(crosslistings.dept), ?)'
-            optionalArguments.append(str.lower(dept))
+            optionalArguments.append(str.lower(dept[0]))
         if(num is not None):
             stmtStr = stmtStr + ' AND INSTR(LOWER(crosslistings.coursenum), ?)'
-            optionalArguments.append(num)
+            optionalArguments.append(num[0])
         if(area is not None):
             stmtStr = stmtStr + ' AND INSTR(LOWER(courses.area), ?)'
-            optionalArguments.append(str.lower(area))
+            optionalArguments.append(str.lower(area[0]))
         if(title is not None):
             stmtStr = stmtStr + ' AND INSTR(LOWER(courses.title), ?)'
-            optionalArguments.append(str.lower(title))
+            optionalArguments.append(str.lower(title[0]))
         stmtStr = stmtStr + ' ORDER BY dept, coursenum, classid'
         
         # execute statement
