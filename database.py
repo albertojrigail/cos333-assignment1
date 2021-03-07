@@ -126,7 +126,7 @@ class Database:
         return ClassDetails(courseid, days, starttime, endtime, bldg, roomnum, \
             area, title, descrip, prereqs, depts, profs)
 
-#-----------------------------------------------------------------------
+#----------------------------------=-------------------------------------
 
 # For testing:
 
