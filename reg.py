@@ -5,11 +5,9 @@
 # Author: Alberto Rigail
 #-----------------------------------------------------------------------
 
-from os import path
 from sys import argv, stderr, exit
-from sqlite3 import connect
+from database import Database
 import argparse
-import textwrap 
 
 #-----------------------------------------------------------------------
 
@@ -26,77 +24,21 @@ def main(argv):
     
     # parse arguments
     arguments = parser.parse_args()
-    dept = arguments.d
-    num = arguments.n
-    area = arguments.a
-    title = arguments.t
+    arguments = [arguments.d, arguments.n, arguments.a, arguments.t]
 
-    # check if database is in current directory
-    if not path.isfile(DATABASE_NAME):
-       print(argv[0] + ': database reg.sqlite not found', file=stderr)
-       exit(1)       
     try:
-        connection = connect(DATABASE_NAME)
-        cursor = connection.cursor()
-
-        # create a prepared statement and substitute values.
-        stmtStr = 'SELECT classid, dept, coursenum, area, title ' + \
-            'FROM classes, courses, crosslistings ' + \
-            'WHERE classes.courseid = courses.courseid ' + \
-            'AND courses.courseid = crosslistings.courseid'
-        
-        # add specific conditions given by optional arguments
-        optionalArguments = []
-        if(dept is not None):
-            stmtStr = stmtStr + ' AND INSTR(LOWER(crosslistings.dept), ?)'
-            optionalArguments.append(str.lower(dept[0]))
-        if(num is not None):
-            stmtStr = stmtStr + ' AND INSTR(LOWER(crosslistings.coursenum), ?)'
-            optionalArguments.append(num[0])
-        if(area is not None):
-            stmtStr = stmtStr + ' AND INSTR(LOWER(courses.area), ?)'
-            optionalArguments.append(str.lower(area[0]))
-        if(title is not None):
-            stmtStr = stmtStr + ' AND INSTR(LOWER(courses.title), ?)'
-            optionalArguments.append(str.lower(title[0]))
-        stmtStr = stmtStr + ' ORDER BY dept, coursenum, classid'
-        
-        # execute statement
-        if(dept or num or area or title):
-            cursor.execute(stmtStr, optionalArguments)
-        else:
-            cursor.execute(stmtStr)
-
+        db = Database()
+        db.connect()
+        courses = db.searchCourses(arguments)
         # format print statements
         print("ClsId Dept CrsNum Area Title")
         print("----- ---- ------ ---- -----")
-        wrapper = textwrap.TextWrapper(width=49)
 
-        row = cursor.fetchone()
-        while row is not None:
-            # fields
-            ClsId = str(row[0])
-            Dept = str(row[1])
-            CrsNum = str(row[2])
-            Area = str(row[3])
-            Title = str(row[4])
+        for course in courses:
+            print(course)
 
-            print(ClsId.rjust(5), Dept.rjust(4), CrsNum.rjust(6), Area.rjust(4), end=' ')
-            
-            # format title so that it appears in different lines
-            titleLines = wrapper.wrap(Title)
-            print(titleLines[0])
-            for i in range(1, len(titleLines)):
-                print('                       ', end='')
-                print(titleLines[i])
+        db.disconnect()
 
-            # next entry
-            row = cursor.fetchone()
-
-        # finish (good practice)
-        cursor.close()
-        connection.close()
-        
     except Exception as e:
         print(argv[0] + ':', e, file=stderr)
         exit(1)
