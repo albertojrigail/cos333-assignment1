@@ -20,7 +20,7 @@ def main(argv):
 
     # parse arguments
     arguments = parser.parse_args(argv[1:])
-    classId = arguments.classid
+    classId = arguments.classid[0]
     print(classId)
 
     try:
