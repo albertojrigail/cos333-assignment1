@@ -85,7 +85,6 @@ class Database:
         
         # get all fields except profname, and departments
         row = cursor.fetchone()
-        print(row)
         if row is None:
             raise Exception("no class with classid " + str(classId) + " exists")
 
@@ -99,8 +98,6 @@ class Database:
         title = str(row[7])
         descrip = str(row[8])
         prereqs = str(row[9])
-
-        print("initial fields gotten")
 
         # get departments and coursenums
         stmtStr = 'SELECT dept, coursenum FROM crosslistings WHERE courseid = ? ' + \

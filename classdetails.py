@@ -38,6 +38,8 @@ class ClassDetails:
             "Building: " + self._bldg + "\n" + \
             "Room: " + self._roomnum + "\n\n"
 
+
+        print("initial info done")
         # dept and number
         if self._depts is not None :
             for i in range(len(self._depts)):
@@ -52,6 +54,7 @@ class ClassDetails:
         # prereqs
         returnString += _strWrapper("Prerequisites: " + self._prereqs)
         returnString += "\n"
+        print("everything except professors!")
         #professors
         if self._profs is not None :
             for i in range(len(self._profs)):
