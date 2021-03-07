@@ -21,7 +21,7 @@ def main(argv):
     # parse arguments
     arguments = parser.parse_args(argv[1:])
     classId = arguments.classid[0]
-    print(classId)
+    print(classId, end="")
 
     try:
         db = Database()
