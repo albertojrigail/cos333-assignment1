@@ -40,7 +40,7 @@ class ClassDetails:
 
         # dept and number
         for i in range(len(self._depts)):
-            returnString += _strWrapper("Dept and Number: " + self._depts)
+            returnString += _strWrapper("Dept and Number: " + self._depts[i])
         returnString += "\n"
         returnString += "Area: " + self._area + "\n\n"
         # title
