@@ -12,6 +12,7 @@ def _strWrapper(string):
     lines = wrapper.wrap(string)
     for i in range(len(lines)):
         returnString += lines[i] + "\n"
+    return returnString
 
 class ClassDetails:
 
