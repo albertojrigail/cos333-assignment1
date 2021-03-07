@@ -35,7 +35,7 @@ def main(argv):
         print("----- ---- ------ ---- -----")
 
         for course in courses:
-            print(course)
+            print(course, end="")
 
         db.disconnect()
 
