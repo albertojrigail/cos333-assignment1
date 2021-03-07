@@ -17,7 +17,7 @@ class Course:
 
     def __str__(self):
         courseString = self._classId.rjust(5) + ' ' + self._dept.rjust(4) + ' ' \
-            + self._crsNum.rjust(6) + ' '  + self._area.rjust(4)
+            + self._crsNum.rjust(6) + ' '  + self._area.rjust(4) + ' '
         
         # format title so that it appears in different lines
         wrapper = textwrap.TextWrapper(width=49)
