@@ -20,7 +20,8 @@ def main(argv):
 
     # parse arguments
     arguments = parser.parse_args(argv[1:])
-    classId = arguments.classid[0]
+    classId = arguments.classid
+    print(classId)
 
     try:
         db = Database()
