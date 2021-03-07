@@ -40,18 +40,17 @@ class ClassDetails:
             "Room: " + self._roomnum + "\n\n"
 
 
-        print("initial info done")
         # dept and number
         if self._depts is not None :
             for i in range(len(self._depts)):
                 returnString += _strWrapper("Dept and Number: " + self._depts[i])
-        print("checkpoint")
+        
         returnString += "\n"
         returnString += "Area: " + self._area + "\n\n"
-        print("checkpoint")
+        
         # title
         returnString += _strWrapper("Title: " + self._title)
-        print("checkpoint")
+        
         # description
         returnString += _strWrapper("Description: " + self._descrip)
         returnString += "\n"

@@ -27,7 +27,6 @@ def main(argv):
         db = Database()
         db.connect()
         currentClass = db.searchClass(classId)
-        print("getting current class successful!")
         print(currentClass)
         db.disconnect
 
