@@ -39,8 +39,9 @@ class ClassDetails:
             "Room: " + self._roomnum + "\n\n"
 
         # dept and number
-        for i in range(len(self._depts)):
-            returnString += _strWrapper("Dept and Number: " + self._depts[i])
+        if self._depts is not None :
+            for i in range(len(self._depts)):
+                returnString += _strWrapper("Dept and Number: " + self._depts[i])
         returnString += "\n"
         returnString += "Area: " + self._area + "\n\n"
         # title
@@ -52,5 +53,6 @@ class ClassDetails:
         returnString += _strWrapper("Prerequisites: " + self._prereqs)
         returnString += "\n"
         #professors
-        for i in range(len(self._profs)):
-            _strWrapper("Professor: " + self._profs[i])
+        if self._profs is not None :
+            for i in range(len(self._profs)):
+                _strWrapper("Professor: " + self._profs[i])

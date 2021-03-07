@@ -85,6 +85,7 @@ class Database:
         
         # get all fields except profname, and departments
         row = cursor.fetchone()
+        print(row)
         if row is None:
             raise Exception("no class with classid " + str(classId) + " exists")
 
