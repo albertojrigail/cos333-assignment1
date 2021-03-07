@@ -99,6 +99,8 @@ class Database:
         descrip = str(row[8])
         prereqs = str(row[9])
 
+        print("initial fields gotten")
+
         # get departments and coursenums
         stmtStr = 'SELECT dept, coursenum FROM crosslistings WHERE courseid = ? ' + \
                     'ORDER BY dept, coursenum'
@@ -118,7 +120,7 @@ class Database:
         profs = []
         row = cursor.fetchone()
         while row is not None:
-            current = row[0]
+            current = str(row[0])
             profs.append(current)
             row = cursor.fetchone()
 
