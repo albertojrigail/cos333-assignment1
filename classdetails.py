@@ -32,7 +32,7 @@ class ClassDetails:
         self._profs = profs
 
     def __str__(self):
-        returnString = "CourseId: " + self._courseId + "\n\n" + \
+        returnString = "Course Id: " + self._courseId + "\n\n" + \
             "Days: " + self._days + "\n" + \
             "Start time: " + self._starttime + "\n" + \
             "End time: " + self._endtime + "\n" + \
