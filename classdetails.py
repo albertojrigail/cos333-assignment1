@@ -48,13 +48,14 @@ class ClassDetails:
         returnString += "Area: " + self._area + "\n\n"
         # title
         returnString += _strWrapper("Title: " + self._title)
+        print("checkpoint")
         # description
         returnString += _strWrapper("Description: " + self._descrip)
         returnString += "\n"
         # prereqs
         returnString += _strWrapper("Prerequisites: " + self._prereqs)
         returnString += "\n"
-        print("everything except professors!")
+        
         #professors
         if self._profs is not None :
             for i in range(len(self._profs)):
