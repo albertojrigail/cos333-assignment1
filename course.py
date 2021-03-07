@@ -22,9 +22,9 @@ class Course:
         # format title so that it appears in different lines
         wrapper = textwrap.TextWrapper(width=49)
         titleLines = wrapper.wrap(self._title)
-        courseString += titleLines[0]
+        courseString += titleLines[0] + "\n"
         for i in range(1, len(titleLines)):
-            courseString += '                       ' + titleLines[i]
+            courseString += '                       ' + titleLines[i] + "\n"
         return courseString
         
     def getClassId(self):
