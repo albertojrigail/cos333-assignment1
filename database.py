@@ -86,7 +86,7 @@ class Database:
         # get all fields except profname, and departments
         row = cursor.fetchone()
         if row is None:
-            raise Exception("no class with classid " + classId + " exists")
+            raise Exception("no class with classid " + str(classId) + " exists")
 
         courseid = str(row[0])
         days = str(row[1])
@@ -106,7 +106,7 @@ class Database:
         depts = []
         row = cursor.fetchone()
         while row is not None:
-            current = row[0] + ' ' + row[1]
+            current = str(row[0]) + ' ' + str(row[1])
             depts.append(current)
             row = cursor.fetchone()
 
