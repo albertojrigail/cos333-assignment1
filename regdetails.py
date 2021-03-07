@@ -20,12 +20,12 @@ def main(argv):
 
     # parse arguments
     arguments = parser.parse_args(argv[1:])
-    classid = arguments.classid[0]
+    classId = arguments.classid[0]
 
     try:
         db = Database()
         db.connect()
-        currentClass = db.searchClass()
+        currentClass = db.searchClass(classId)
         print(currentClass)
         db.disconnect
 
