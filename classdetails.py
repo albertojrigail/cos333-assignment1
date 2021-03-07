@@ -62,4 +62,5 @@ class ClassDetails:
         #professors
         if self._profs is not None :
             for i in range(len(self._profs)):
-                _strWrapper("Professor: " + self._profs[i])
+                returnString += _strWrapper("Professor: " + self._profs[i])
+        return returnString
