@@ -8,7 +8,7 @@ import textwrap
 
 def _strWrapper(string):
     returnString = ""
-    wrapper = textwrap.TextWrapper(widt=72)
+    wrapper = textwrap.TextWrapper(width=72)
     lines = wrapper.wrap(string)
     for i in range(len(lines)):
         returnString += lines[i] + "\n"

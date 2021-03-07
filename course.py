@@ -20,7 +20,7 @@ class Course:
             + self._crsNum.rjust(6) + ' '  + self._area.rjust(4)
         
         # format title so that it appears in different lines
-        wrapper = textwrap.TextWrapper(widt=49)
+        wrapper = textwrap.TextWrapper(width=49)
         titleLines = wrapper.wrap(self._title)
         courseString += titleLines[0]
         for i in range(1, len(titleLines)):
