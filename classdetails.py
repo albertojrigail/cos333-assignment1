@@ -44,8 +44,10 @@ class ClassDetails:
         if self._depts is not None :
             for i in range(len(self._depts)):
                 returnString += _strWrapper("Dept and Number: " + self._depts[i])
+        print("checkpoint")
         returnString += "\n"
         returnString += "Area: " + self._area + "\n\n"
+        print("checkpoint")
         # title
         returnString += _strWrapper("Title: " + self._title)
         print("checkpoint")
