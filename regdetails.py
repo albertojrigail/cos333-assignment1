@@ -21,13 +21,12 @@ def main(argv):
     # parse arguments
     arguments = parser.parse_args(argv[1:])
     classId = arguments.classid[0]
-    print(classId, end="")
 
     try:
         db = Database()
         db.connect()
         currentClass = db.searchClass(classId)
-        print(currentClass)
+        print(currentClass, end="")
         db.disconnect
 
     except Exception as e:
