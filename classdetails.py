@@ -50,6 +50,7 @@ class ClassDetails:
         
         # title
         returnString += _strWrapper("Title: " + self._title)
+        returnString += "\n"
         
         # description
         returnString += _strWrapper("Description: " + self._descrip)
