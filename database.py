@@ -9,6 +9,7 @@ from sqlite3 import connect
 from sys import stderr
 from os import path
 from course import Course
+from classdetails import ClassDetails
 
 #-----------------------------------------------------------------------
 
@@ -120,6 +121,10 @@ class Database:
             current = row[0]
             profs.append(current)
             row = cursor.fetchone()
+
+        # create object
+        return ClassDetails(courseid, days, starttime, endtime, bldg, roomnum, \
+            area, title, descrip, prereqs, depts, profs)
 
 #-----------------------------------------------------------------------
 

@@ -13,7 +13,7 @@ def _strWrapper(string):
     for i in range(len(lines)):
         returnString += lines[i] + "\n"
 
-class Class:
+class ClassDetails:
 
     def __init__(self, courseId, days, starttime, endtime, \
                 bldg, roomnum, area, title, descrip, prereqs, depts, profs):
