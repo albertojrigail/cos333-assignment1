@@ -44,6 +44,7 @@ def getListWidget(host, port, arguments):
     horizontalScrollbar = QScrollBar()
     listWidget.setVerticalScrollBar(verticalScrollbar) 
     listWidget.setHorizontalScrollBar(horizontalScrollbar) 
+    return listWidget
 
 
 
