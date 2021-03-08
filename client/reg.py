@@ -51,7 +51,7 @@ def getDetailsPopup(host, port, classId):
 def main(argv):
     # set up argparse with optional arguments
     parser = argparse.ArgumentParser(description="Client for the registrar application")
-    parser.add_argument('host', type=int, help="the host on which the server is running", nargs=1)
+    parser.add_argument('host', type=str, help="the host on which the server is running", nargs=1)
     parser.add_argument('port', type=int, help="the port at which the server is listening", nargs=1)
 
     # parse arguments
