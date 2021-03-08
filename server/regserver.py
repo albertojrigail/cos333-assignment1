@@ -15,7 +15,9 @@ from getclassdetails import getClassDetails
 
 def handleClient(sock):
     inFlo = sock.makefile(mode='rb')
-    request, arguments = load(inFlo)
+    incoming = load(inFlo)
+    request = incoming[0]
+    arguments = incoming[1]
     outFlo = sock.makefile(mode='wb')
 
     # call helper functions, and dump requested objects
