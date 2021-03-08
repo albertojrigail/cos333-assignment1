@@ -34,11 +34,10 @@ def getListWidget(host, port, arguments):
 
     # create list widget, and add courses that match
     listWidget = QListWidget()
-    listWidget.addItem()
     if coursesStrings is not None:
         for courseString in coursesStrings:
             currentItem = QListWidgetItem(courseString)
-            listWidget.add(currentItem)
+            listWidget.addItem(currentItem)
 
     # set scrollbars
     verticalScrollbar = QScrollBar()
