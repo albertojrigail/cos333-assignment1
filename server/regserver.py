@@ -14,7 +14,6 @@ from getclassdetails import getClassDetails
 #-----------------------------------------------------------------------
 
 def handleClient(sock):
-    print("handleClient(sock)")
     inFlo = sock.makefile(mode='rb')
     incoming = load(inFlo)
     request = incoming[0]
