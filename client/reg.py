@@ -23,11 +23,13 @@ def getListWidget(host, port, arguments):
     # send request
     outFlo = sock.makefile(mode = 'wb')
     dump(["getOverviews", arguments], outFlo)
+    print("Sent request")
 
     # read response
     inFlo = sock.makefile(mode = 'rb')
     coursesStrings = load(inFlo)
     sock.close()
+    print("Read response and closed socket")
 
     # create list widget, and add courses that match
     listWidget = QListWidget()
