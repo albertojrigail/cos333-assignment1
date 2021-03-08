@@ -4,8 +4,6 @@
 # course.py
 # Author: Alberto Rigail
 #-----------------------------------------------------------------------
-import textwrap
-
 class Course:
 
     def __init__(self, classId, dept, crsNum, area, title):
@@ -16,16 +14,8 @@ class Course:
         self._title = str(title)
 
     def __str__(self):
-        courseString = self._classId.rjust(5) + ' ' + self._dept.rjust(4) + ' ' \
-            + self._crsNum.rjust(6) + ' '  + self._area.rjust(4) + ' '
-        
-        # format title so that it appears in different lines
-        wrapper = textwrap.TextWrapper(width=49)
-        titleLines = wrapper.wrap(self._title)
-        courseString += titleLines[0] + "\n"
-        for i in range(1, len(titleLines)):
-            courseString += '                       ' + titleLines[i] + "\n"
-        return courseString
+        return self._classId.rjust(5) + ' ' + self._dept.rjust(4) + ' ' \
+            + self._crsNum.rjust(6) + ' '  + self._area.rjust(4) + ' ' + self._title
         
     def getClassId(self):
         return self._classId
