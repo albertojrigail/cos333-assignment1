@@ -17,7 +17,6 @@ def handleClient(sock):
     print("handleClient(sock)")
     inFlo = sock.makefile(mode='rb')
     incoming = load(inFlo)
-    print("incoming " + incoming)
     request = incoming[0]
     arguments = incoming[1]
     outFlo = sock.makefile(mode='wb')
