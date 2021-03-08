@@ -36,6 +36,7 @@ def getListWidget(host, port, arguments):
     listWidget = QListWidget()
     if coursesStrings is not None:
         for courseString in coursesStrings:
+            print(courseString)
             currentItem = QListWidgetItem(courseString)
             listWidget.addItem(currentItem)
 
