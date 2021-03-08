@@ -7,30 +7,30 @@
 
 from sys import exit, argv, stderr
 from socket import socket, SOL_SOCKET, SO_REUSEADDR
-from pickle import dump
+from pickle import dump, load
 from getcourse import getCourse
 from getclassdetails import getClassDetails
 
 #-----------------------------------------------------------------------
 
 def handleClient(sock):
-    inFlo = sock.makefile(mode='r', encoding='utf-8')
+    inFlo = sock.makefile(mode='rb')
+    request, arguments = load(inFlo)
     outFlo = sock.makefile(mode='wb')
-    request = inFlo.readline()
-    arguments = inFlo.readline()
 
     # call helper functions, and dump requested objects
-    if request == "course":
+    print("Received command: " + request)
+    if request == "getOverviews":
         courses = getCourse(arguments)
         dump(courses, outFlo)
-    elif request == "classDetails":
+    elif request == "getDetail":
         classDetails = getClassDetails(arguments)
         dump(classDetails, outFlo)
     else:
         raise Exception("Message is empty")
-    
+
+    # send information back
     outFlo.flush()
-    print("Wrote " + request + " to client")
  
 #-----------------------------------------------------------------------
 
@@ -52,13 +52,12 @@ def main(argv):
         while True:
             try:
                 sock, clientAddr = serverSock.accept()
-                print('Accepted connection for ' + str(clientAddr))
-                print('Opened socket for ' + str(clientAddr))
+                print('Accepted connection, opened socket')
                 handleClient(sock)
                 sock.close()
-                print('Closed socket for ' + str(clientAddr))
+                print('Closed socket')
             except Exception as e:
-                print(e, file=stderr)
+                print(argv[0] + ": " + e, file=stderr)
     except Exception as e:
         print(e, file=stderr)
         exit(1)
