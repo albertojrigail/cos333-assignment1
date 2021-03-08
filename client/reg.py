@@ -14,30 +14,42 @@ from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QDesktopWidget, QListWidge
 from PyQt5.QtCore import Qt
 
 #-----------------------------------------------------------------------
-# this function calls
-def getListWidget(host, port, arguments):
+REQUEST_COURSES_COMMAND = "getOverviews"
+REQUEST_CLASS_DETAILS_COMMAND = "getDetail"
+
+
+#-----------------------------------------------------------------------
+def sendRequest(host, port, requestName, arguments):
     # connect
     sock = socket()
     sock.connect((host, port))
 
-    # send request
+    # socket files
     outFlo = sock.makefile(mode = 'wb')
-    dump(["getOverviews", arguments], outFlo)
+    inFlo = sock.makefile(mode = 'rb')
+
+    # send request
+    dump(["requestName", arguments], outFlo)
     outFlo.flush()
     print("Sent request")
 
     # read response
-    inFlo = sock.makefile(mode = 'rb')
-    coursesStrings = load(inFlo)
-    sock.close()
+    responseString = load(inFlo)
     print("Read response and closed socket")
+    sock.close()
+    return responseString
+    
 
+# this function makes a list widget, amnd calls 
+def getListWidget(host, port, arguments):
     # create list widget, and add courses that match
     listWidget = QListWidget()
-    if coursesStrings is not None:
-        for courseString in coursesStrings:
-            print(courseString)
-            currentItem = QListWidgetItem(courseString)
+    courses = sendRequest(host, port, REQUEST_COURSES_COMMAND, arguments)
+
+    # fill up list with courses
+    if courses is not None:
+        for course in courses:
+            currentItem = QListWidgetItem(course)
             listWidget.addItem(currentItem)
 
     # set scrollbars
