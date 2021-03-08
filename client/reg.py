@@ -23,6 +23,7 @@ def getListWidget(host, port, arguments):
     # send request
     outFlo = sock.makefile(mode = 'wb')
     dump(["getOverviews", arguments], outFlo)
+    outFlo.flush()
     print("Sent request")
 
     # read response
