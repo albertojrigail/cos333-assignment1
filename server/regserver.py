@@ -8,8 +8,8 @@
 from sys import exit, argv, stderr
 from socket import socket, SOL_SOCKET, SO_REUSEADDR
 from pickle import dump
-from server.getcourse import getCourse
-from server.getclassdetails import getClassDetails
+from getcourse import getCourse
+from getclassdetails import getClassDetails
 
 #-----------------------------------------------------------------------
 
