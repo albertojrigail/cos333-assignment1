@@ -57,7 +57,7 @@ def main(argv):
     # parse arguments
     arguments = parser.parse_args(argv[1:])
     host = arguments.host[0]
-    port = arguments.port[1]
+    port = arguments.port[0]
     
     # graphical programming
     app = QApplication(argv)
