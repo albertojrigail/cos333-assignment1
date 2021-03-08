@@ -7,6 +7,7 @@
 
 from sys import argv, stderr, exit
 from database import Database
+from classdetails import ClassDetails
 import argparse
 
 #-----------------------------------------------------------------------

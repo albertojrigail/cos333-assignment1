@@ -7,6 +7,7 @@
 
 from sys import argv, stderr, exit
 from database import Database
+from course import Course
 import argparse
 
 #-----------------------------------------------------------------------
@@ -28,5 +29,8 @@ def getCourse(args):
     db = Database()
     db.connect()
     courses = db.searchCourses(arguments)
+    coursesStrings = []
+    for course in courses:
+        coursesStrings.append(str(course))
     db.disconnect()
-    return courses
+    return coursesStrings
