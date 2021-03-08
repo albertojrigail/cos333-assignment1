@@ -57,7 +57,8 @@ def main(argv):
                 sock.close()
                 print('Closed socket')
             except Exception as e:
-                print(argv[0] + ": " + e, file=stderr)
+                print(e, file=stderr)
+
     except Exception as e:
         print(e, file=stderr)
         exit(1)
