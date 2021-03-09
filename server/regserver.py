@@ -61,6 +61,7 @@ def main(argv):
                 sock.close()
                 print('Closed socket')
             except Exception as e:
+                print("Handling exception!")
                 print(argv[0] + ":", e, file=stderr)
 
     except Exception as e:
