@@ -16,18 +16,3 @@ class Course:
     def __str__(self):
         return self._classId.rjust(5) + ' ' + self._dept.rjust(4) + ' ' \
             + self._crsNum.rjust(6) + ' '  + self._area.rjust(4) + ' ' + self._title
-        
-    def getClassId(self):
-        return self._classId
-
-    def getDept(self):
-        return self._dept
-    
-    def getCrsNum(self):
-        return self._crsNum
-    
-    def getArea(self):
-        return self._area
-
-    def getTitle(self):
-        return self._title

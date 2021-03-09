@@ -125,15 +125,3 @@ class Database:
         # create object
         return ClassDetails(courseid, days, starttime, endtime, bldg, roomnum, \
             area, title, descrip, prereqs, depts, profs)
-
-#----------------------------------=-------------------------------------
-
-# For testing:
-
-if __name__ == '__main__':
-    database = Database()
-    database.connect()
-    courses = database.searchCourses('courses', [None, None, None, None])
-    for course in courses:
-        print(course)
-    database.disconnect()
