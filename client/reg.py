@@ -49,8 +49,6 @@ def main(argv):
     listWidget.setVerticalScrollBar(verticalScrollbar) 
     listWidget.setHorizontalScrollBar(horizontalScrollbar) 
     listWidget.setItemAlignment(Qt.AlignLeft)
-    listWidgetFrame = QFrame()
-    listWidgetFrame.setLayout(listWidget)
     
 
     # on double click, show class details
@@ -103,7 +101,7 @@ def main(argv):
 
     # ADD FORM AND LIST TO LAYOUT
     layout.addWidget(formWidgetFrame)
-    layout.addWidget(listWidgetFrame)
+    layout.addWidget(listWidget)
 
     # GENERAL WINDOW SETUP
     frame = QFrame()
