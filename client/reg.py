@@ -133,6 +133,11 @@ def main(argv):
         args = arguments.strip()
         updateList(args)
     submitButton.clicked.connect(submitQuery)
+    submitButton.itemActivated.connect(submitQuery)
+    deptEdit.itemActivated.connect(submitQuery)
+    numEdit.itemActivated.connect(submitQuery)
+    areaEdit.itemActivated.connect(submitQuery)
+    titleEdit.itemActivated.connect(submitQuery)
 
 
     # ADD FORM AND LIST TO LAYOUT
