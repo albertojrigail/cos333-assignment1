@@ -61,7 +61,6 @@ def main(argv):
         else:
             # message box formatting and return
             reply = QMessageBox.information(window, "Class Information", classDetails)
-    listWidget.itemDoubleClicked.connect(ItemDobleClicked)
     listWidget.itemActivated.connect(ItemDobleClicked)
 
 
