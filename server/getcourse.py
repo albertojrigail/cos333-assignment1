@@ -28,7 +28,8 @@ def getCourse(args):
         commandLine = args
         commandLine.strip()
         argv = commandLine.split(" ")
-        arguments = parser.parse_args(args)
+        print(argv)
+        arguments = parser.parse_args(argv)
     arguments = [arguments.d, arguments.n, arguments.a, arguments.t]
 
     # no exception catching here
