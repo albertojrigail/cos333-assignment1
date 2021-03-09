@@ -82,6 +82,9 @@ def main(argv):
     fieldsLayout = QFormLayout()
     formWidgetLayout.setSpacing(0)
     fieldsLayout.setSpacing(0)
+    formWidgetLayout.setContentsMargins(0, 0, 0, 0)
+    fieldsLayout.setContentsMargins(0, 0, 0, 0)
+
 
     deptEdit = QLineEdit()    
     numEdit = QLineEdit()
