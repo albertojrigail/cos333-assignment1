@@ -8,7 +8,7 @@
 from sys import argv, stderr, exit
 from request import sendRequest
 import argparse
-from PyQt5.QtWidgets import QApplication, QFrame, QLabel
+from PyQt5.QtWidgets import QApplication, QFrame, QLabel, QLineEdit, QPushButton
 from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QDesktopWidget, QListWidget, QScrollBar, QListWidgetItem, QMessageBox
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
@@ -41,7 +41,6 @@ def main(argv):
     layout.setSpacing(0)
     layout.setContentsMargins(0, 0, 0, 0)
 
-
     # CREATE LIST WITH COURSES
     listWidget = QListWidget()
     font = QFont('Courier', 10) 
@@ -50,6 +49,8 @@ def main(argv):
     listWidget.setVerticalScrollBar(verticalScrollbar) 
     listWidget.setHorizontalScrollBar(horizontalScrollbar) 
     listWidget.setItemAlignment(Qt.AlignLeft)
+    listWidget.itemDoubleClicked.connect(ItemDobleClicked)
+    
 
     # on double click, show class details
     def ItemDobleClicked():
@@ -62,28 +63,55 @@ def main(argv):
         # message box formatting and return
         reply = QMessageBox.information(window, "Class Information", classDetails)
 
-   # fill up list with courses
-    listWidget.itemDoubleClicked.connect(ItemDobleClicked)
-    courses = sendRequest(host, port, REQUEST_COURSES_COMMAND, "")
-    if courses is not None:
-        for course in courses:
-            currentItem = QListWidgetItem(course)
-            currentItem.setFont(font)
-            listWidget.addItem(currentItem)
+    # fill the list with courses that match with "arguments"
+    def updateList(arguments):
+        listWidget.clear()
+        courses = sendRequest(host, port, REQUEST_COURSES_COMMAND, arguments)
+        if courses is not None:
+            for course in courses:
+                currentItem = QListWidgetItem(course)
+                currentItem.setFont(font)
+                listWidget.addItem(currentItem)
+        
+    # CREATE TOP FORM WITH INPUT FIELDS AND BUTTON
+    formWidget = QVBoxLayout()
+    classIdEdit = QLineEdit()
+    deptEdit = QLineEdit()
+    noEdit = QLineEdit()
+    areaEdit = QLineEdit()
+    titleEdit = QLineEdit()
+    submitButton = QPushButton()
+
+    formWidget.addWidget(classIdEdit)
+    formWidget.addWidget(deptEdit)
+    formWidget.addWidget(noEdit)
+    formWidget.addWidget(areaEdit)
+    formWidget.addWidget(titleEdit)
+    formWidget.addWidget(submitButton)
 
 
-    # add list widget to layout
+    # set up submitting logic
+    def submitQuery():
+        arguments =""
+        # set up arguments
+        updateList(arguments)
+    submitButton.clicked.connect()
+
+
+    # ADD FORM AND LIST TO LAYOUT
+    layout.addWidget(formWidget)
     layout.addWidget(listWidget)
 
+
+
+    # GENERAL WINDOW SETUP
     frame = QFrame()
     frame.setLayout(layout)
-    
     window = QMainWindow()
     window.setWindowTitle('Princeton University Class Search')
     window.setCentralWidget(frame)
     screenSize = QDesktopWidget().screenGeometry()
     window.resize(screenSize.width()//2, screenSize.height()//2)
-    
     window.show()
     exit(app.exec_())
 
