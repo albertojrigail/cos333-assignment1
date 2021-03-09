@@ -9,7 +9,7 @@ from sys import argv, stderr, exit
 from request import sendRequest
 import requestnames
 import argparse
-from PyQt5.QtWidgets import QApplication, QFrame, QLabel, QFont
+from PyQt5.QtWidgets import QApplication, QFrame, QLabel
 from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QDesktopWidget, QListWidget, QScrollBar, QListWidgetItem
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
@@ -21,7 +21,7 @@ def getListWidget(host, port, arguments):
     # create list widget, and add courses that match
     listWidget = QListWidget()
     courses = sendRequest(host, port, REQUEST_COURSES_COMMAND, arguments)
-    
+
     # set font
     font = QFont('Courier', 10) 
 
