@@ -110,7 +110,7 @@ def main(argv):
         if num != "":
             arguments += "-n " + num + " "
         if area != "":
-            arguments += "-a " + dept + " "
+            arguments += "-a " + area + " "
         if title != "":
             arguments += "-t " + title + " "
         # set up arguments
