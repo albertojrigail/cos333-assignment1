@@ -22,7 +22,7 @@ def getCourse(args):
     
     # parse arguments
     print("getCourse")
-    arguments = parser.parse_args(args)
+    arguments = parser.parse_args("regserver.py " + args)
     print(arguments)
     arguments = [arguments.d, arguments.n, arguments.a, arguments.t]
 
