@@ -23,6 +23,7 @@ def getCourse(args):
     # parse arguments
     print("getCourse")
     commandLine = "regserver.py " + args
+    commandLine.strip()
     argv = commandLine.split(" ")
     arguments = parser.parse_args(argv)
     print(arguments)

@@ -114,7 +114,7 @@ def main(argv):
         if title != "":
             arguments += "-t " + title + " "
         # set up arguments
-        args = arguments.rstrip()
+        args = arguments.strip()
         updateList(args)
     submitButton.clicked.connect(submitQuery)
 
