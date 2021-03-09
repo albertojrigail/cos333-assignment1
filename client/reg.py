@@ -11,7 +11,7 @@ import argparse
 from PyQt5.QtWidgets import QApplication, QFrame, QLabel, QLineEdit, QPushButton, QFormLayout
 from PyQt5.QtWidgets import QMainWindow, QGridLayout, QVBoxLayout,QHBoxLayout, QDesktopWidget, QListWidget, QScrollBar, QListWidgetItem, QMessageBox
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFont, QBrush
 
 #-----------------------------------------------------------------------
 
@@ -46,7 +46,11 @@ def main(argv):
     listWidget.setHorizontalScrollBar(horizontalScrollbar) 
     listWidget.setItemAlignment(Qt.AlignLeft)
     listWidget.resize(screenSize.width()//2, screenSize.height()//4)
-    
+
+    # on item changed, highlight it
+    def ItemChanged():
+        item = listWidget.currentItem()
+        item.setBackground(QBrush(Qt.blue, Qt.SolidPattern))
 
     # on double click, show class details
     def ItemDobleClicked():
@@ -62,6 +66,7 @@ def main(argv):
             # message box formatting and return
             reply = QMessageBox.information(window, "Class Information", classDetails)
     listWidget.itemActivated.connect(ItemDobleClicked)
+    listWidget.itemChanged.connect(ItemChanged)
 
 
     # fill the list with courses that match with "arguments"
