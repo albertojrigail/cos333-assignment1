@@ -6,39 +6,15 @@
 #-----------------------------------------------------------------------
 
 from sys import argv, stderr, exit
-from socket import socket
-from pickle import load, dump
+from request import sendRequest
+import requestnames
 import argparse
 from PyQt5.QtWidgets import QApplication, QFrame, QLabel, QFont
 from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QDesktopWidget, QListWidget, QScrollBar, QListWidgetItem
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QFont
 
 #-----------------------------------------------------------------------
-REQUEST_COURSES_COMMAND = "getOverviews"
-REQUEST_CLASS_DETAILS_COMMAND = "getDetail"
-
-
-#-----------------------------------------------------------------------
-def sendRequest(host, port, requestName, arguments):
-    # connect
-    sock = socket()
-    sock.connect((host, port))
-
-    # socket files
-    outFlo = sock.makefile(mode = 'wb')
-    inFlo = sock.makefile(mode = 'rb')
-
-    # send request
-    dump([requestName, arguments], outFlo)
-    outFlo.flush()
-    print("Sent request")
-
-    # read response
-    responseString = load(inFlo)
-    print("Read response and closed socket")
-    sock.close()
-    return responseString
-    
 
 # this function makes a list widget, amnd calls 
 def getListWidget(host, port, arguments):
