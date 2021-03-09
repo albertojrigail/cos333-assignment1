@@ -59,7 +59,7 @@ def main(argv):
             reply = QMessageBox.critical(window, "Error", str(e))
         else:
             # message box formatting and return
-            reply = QMessageBox.information(window, "Class Information", classDetails)
+            reply = QMessageBox.information(window, "Class Details", classDetails)
     listWidget.itemActivated.connect(ItemDobleClicked)
 
     # fill the list with courses that match with "arguments"
