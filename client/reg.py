@@ -73,6 +73,7 @@ def main(argv):
                 currentItem = QListWidgetItem(course)
                 currentItem.setFont(font)
                 listWidget.addItem(currentItem)
+    #initial call
     updateList("")        
 
     # CREATE TOP FORM WITH INPUT FIELDS AND BUTTON
@@ -114,7 +115,6 @@ def main(argv):
             arguments += "-t " + title + " "
         # set up arguments
         args = arguments.rstrip()
-        print(args)
         updateList(args)
     submitButton.clicked.connect(submitQuery)
 

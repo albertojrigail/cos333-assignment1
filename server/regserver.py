@@ -22,6 +22,7 @@ def handleClient(sock):
 
     # call helper functions, and dump requested objects
     print("Received command: " + request)
+    print("Received argumments: " + arguments)
     if request == "getOverviews":
         courses = getCourse(arguments)
         dump(courses, outFlo)
