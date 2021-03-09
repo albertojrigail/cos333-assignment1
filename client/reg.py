@@ -40,6 +40,7 @@ def main(argv):
     layout = QVBoxLayout()
     layout.setSpacing(0)
     layout.setContentsMargins(0, 0, 0, 0)
+    screenSize = QDesktopWidget().screenGeometry()
 
     # CREATE LIST WITH COURSES
     listWidget = QListWidget()
@@ -72,15 +73,22 @@ def main(argv):
                 currentItem = QListWidgetItem(course)
                 currentItem.setFont(font)
                 listWidget.addItem(currentItem)
-        
+    updateList("")        
+
     # CREATE TOP FORM WITH INPUT FIELDS AND BUTTON
     formWidgetLayout = QVBoxLayout()
     classIdEdit = QLineEdit()
+    classIdEdit.setFixedWidth(screenSize.width()//2)
     deptEdit = QLineEdit()
+    deptEdit.setFixedWidth(screenSize.width()//2)
     noEdit = QLineEdit()
+    noEdit.setFixedWidth(screenSize.width()//2)
     areaEdit = QLineEdit()
+    areaEdit.setFixedWidth(screenSize.width()//2)
     titleEdit = QLineEdit()
+    titleEdit.setFixedWidth(screenSize.width()//2)
     submitButton = QPushButton()
+    submitButton.setFixedWidth(screenSize.width()//2)
 
     formWidgetLayout.addWidget(classIdEdit)
     formWidgetLayout.addWidget(deptEdit)
@@ -109,7 +117,6 @@ def main(argv):
     window = QMainWindow()
     window.setWindowTitle('Princeton University Class Search')
     window.setCentralWidget(frame)
-    screenSize = QDesktopWidget().screenGeometry()
     window.resize(screenSize.width()//2, screenSize.height()//2)
     window.show()
     exit(app.exec_())
