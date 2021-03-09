@@ -61,10 +61,10 @@ def main(argv):
                 sock.close()
                 print('Closed socket')
             except Exception as e:
-                print(argv[0] + ": " + e, file=stderr)
+                print(argv[0] + ":", e, file=stderr)
 
     except Exception as e:
-        print(e, file=stderr)
+        print(argv[0] + ":", e, file=stderr)
         exit(1)
 
 #-----------------------------------------------------------------------
