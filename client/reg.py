@@ -57,8 +57,7 @@ def main(argv):
         item = listWidget.currentItem()
         text = str(item.text())
         row = text.split(' ')
-        print('row', row)
-        classId = row[0]
+        classId = row[1] # location of the classId string
         print("classId " + classId)
         classDetails = sendRequest(host, port, REQUEST_CLASS_DETAILS_COMMAND, classId)
         reply = QMessageBox.information(window, "Class Information", classDetails)
