@@ -77,12 +77,10 @@ def main(argv):
 
     # CREATE TOP FORM WITH INPUT FIELDS AND BUTTON
     formWidgetLayout = QVBoxLayout()
-    classIdEdit = QLineEdit()
-    classIdEdit.setFixedWidth(screenSize.width()//2)
     deptEdit = QLineEdit()
     deptEdit.setFixedWidth(screenSize.width()//2)
-    noEdit = QLineEdit()
-    noEdit.setFixedWidth(screenSize.width()//2)
+    numEdit = QLineEdit()
+    numEdit.setFixedWidth(screenSize.width()//2)
     areaEdit = QLineEdit()
     areaEdit.setFixedWidth(screenSize.width()//2)
     titleEdit = QLineEdit()
@@ -90,9 +88,8 @@ def main(argv):
     submitButton = QPushButton()
     submitButton.setFixedWidth(screenSize.width()//2)
 
-    formWidgetLayout.addWidget(classIdEdit)
     formWidgetLayout.addWidget(deptEdit)
-    formWidgetLayout.addWidget(noEdit)
+    formWidgetLayout.addWidget(numEdit)
     formWidgetLayout.addWidget(areaEdit)
     formWidgetLayout.addWidget(titleEdit)
     formWidgetLayout.addWidget(submitButton)
@@ -102,6 +99,19 @@ def main(argv):
     # set up submitting logic
     def submitQuery():
         arguments = ""
+        dept = deptEdit.text()
+        num = numEdit.text()
+        area = areaEdit.text()
+        title = titleEdit.text()
+
+        if dept != "":
+            arguments += "-d " + dept + " "
+        if num != "":
+            arguments += "-n " + num + " "
+        if area != "":
+            arguments += "-a " + dept + " "
+        if title != "":
+            arguments += "-t " + title + " "
         # set up arguments
         updateList(arguments)
     submitButton.clicked.connect(submitQuery)
