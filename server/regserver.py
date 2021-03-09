@@ -10,6 +10,7 @@ from socket import socket, SOL_SOCKET, SO_REUSEADDR
 from pickle import dump, load
 from getcourse import getCourse
 from getclassdetails import getClassDetails
+import argparse
 
 #-----------------------------------------------------------------------
 
@@ -29,8 +30,6 @@ def handleClient(sock):
     elif request == "getDetail":
         classDetails = getClassDetails(arguments)
         dump(classDetails, outFlo)
-    else:
-        raise Exception("Message is empty")
 
     # send information back
     outFlo.flush()
@@ -38,11 +37,13 @@ def handleClient(sock):
 #-----------------------------------------------------------------------
 
 def main(argv):
+    # PARSE ARGUMENTS
+    parser = argparse.ArgumentParser(description="Server for the registrar application")
+    parser.add_argument('port', type=int, help="the port at which the server should listen", nargs=1)
+    arguments = parser.parse_args(argv[1:])
+    port = arguments.port[0]
 
-    if len(argv) != 2:
-        print('Usage: python %s port' % argv[0])
-        exit(1)
-
+    # RUN SERVER
     try:
         port = int(argv[1])
         serverSock = socket()
