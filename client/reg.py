@@ -49,6 +49,8 @@ def main(argv):
     listWidget.setVerticalScrollBar(verticalScrollbar) 
     listWidget.setHorizontalScrollBar(horizontalScrollbar) 
     listWidget.setItemAlignment(Qt.AlignLeft)
+    listWidgetFrame = QFrame()
+    listWidgetFrame.setLayout(listWidget)
     
 
     # on double click, show class details
@@ -74,7 +76,7 @@ def main(argv):
                 listWidget.addItem(currentItem)
         
     # CREATE TOP FORM WITH INPUT FIELDS AND BUTTON
-    formWidget = QVBoxLayout()
+    formWidgetLayout = QVBoxLayout()
     classIdEdit = QLineEdit()
     deptEdit = QLineEdit()
     noEdit = QLineEdit()
@@ -82,27 +84,26 @@ def main(argv):
     titleEdit = QLineEdit()
     submitButton = QPushButton()
 
-    formWidget.addWidget(classIdEdit)
-    formWidget.addWidget(deptEdit)
-    formWidget.addWidget(noEdit)
-    formWidget.addWidget(areaEdit)
-    formWidget.addWidget(titleEdit)
-    formWidget.addWidget(submitButton)
-
+    formWidgetLayout.addWidget(classIdEdit)
+    formWidgetLayout.addWidget(deptEdit)
+    formWidgetLayout.addWidget(noEdit)
+    formWidgetLayout.addWidget(areaEdit)
+    formWidgetLayout.addWidget(titleEdit)
+    formWidgetLayout.addWidget(submitButton)
+    formWidgetFrame = QFrame()
+    formWidgetFrame.setLayout(formWidgetLayout)
 
     # set up submitting logic
     def submitQuery():
-        arguments =""
+        arguments = ""
         # set up arguments
         updateList(arguments)
     submitButton.clicked.connect(submitQuery)
 
 
     # ADD FORM AND LIST TO LAYOUT
-    layout.addWidget(formWidget)
-    layout.addWidget(listWidget)
-
-
+    layout.addWidget(formWidgetFrame)
+    layout.addWidget(listWidgetFrame)
 
     # GENERAL WINDOW SETUP
     frame = QFrame()
