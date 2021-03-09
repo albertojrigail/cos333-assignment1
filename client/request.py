@@ -22,11 +22,10 @@ def sendRequest(host, port, requestName, arguments):
     print(arguments)
     dump([requestName, arguments], outFlo)
     outFlo.flush()
-    print("Sent request")
+    print("Sent command", requestName)
 
     # read response
     responseData = load(inFlo)
-    print("Read response and closed socket")
     sock.close()
     if responseData[0] != 200:
         raise Exception(responseData[1])

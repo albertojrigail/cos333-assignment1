@@ -21,14 +21,12 @@ def getCourse(args):
     parser.add_argument('-t', metavar='title', type=str, help="show only those classes whose course title contains title", nargs=1)
     
     # parse arguments
-    print("getCourse")
     if args == "":
         arguments = parser.parse_args(args)
     else:
         commandLine = args
         commandLine.strip()
         argv = commandLine.split(" ")
-        print(argv)
         arguments = parser.parse_args(argv)
     arguments = [arguments.d, arguments.n, arguments.a, arguments.t]
 
