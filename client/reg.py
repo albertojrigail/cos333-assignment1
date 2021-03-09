@@ -29,7 +29,7 @@ def sendRequest(host, port, requestName, arguments):
     inFlo = sock.makefile(mode = 'rb')
 
     # send request
-    dump(["requestName", arguments], outFlo)
+    dump([requestName, arguments], outFlo)
     outFlo.flush()
     print("Sent request")
 
