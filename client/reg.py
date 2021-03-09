@@ -49,7 +49,6 @@ def main(argv):
     listWidget.setVerticalScrollBar(verticalScrollbar) 
     listWidget.setHorizontalScrollBar(horizontalScrollbar) 
     listWidget.setItemAlignment(Qt.AlignLeft)
-    listWidget.itemDoubleClicked.connect(ItemDobleClicked)
     
 
     # on double click, show class details
@@ -62,6 +61,7 @@ def main(argv):
 
         # message box formatting and return
         reply = QMessageBox.information(window, "Class Information", classDetails)
+    listWidget.itemDoubleClicked.connect(ItemDobleClicked)
 
     # fill the list with courses that match with "arguments"
     def updateList(arguments):
