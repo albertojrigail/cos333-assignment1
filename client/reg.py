@@ -7,7 +7,6 @@
 
 from sys import argv, stderr, exit
 from request import sendRequest
-import requestnames
 import argparse
 from PyQt5.QtWidgets import QApplication, QFrame, QLabel
 from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QDesktopWidget, QListWidget, QScrollBar, QListWidgetItem
@@ -16,6 +15,10 @@ from PyQt5.QtGui import QFont
 
 #-----------------------------------------------------------------------
 
+REQUEST_COURSES_COMMAND = "getOverviews"
+REQUEST_CLASS_DETAILS_COMMAND = "getDetail"
+
+#-----------------------------------------------------------------------
 # this function makes a list widget, amnd calls 
 def getListWidget(host, port, arguments):
     # create list widget, and add courses that match
