@@ -53,15 +53,13 @@ def main(argv):
 
     # on double click, show class details
     def ItemDobleClicked():
-        print("ItemDoubleClicked()")
         item = listWidget.currentItem()
         text = str(item.text())
         row = text.split(' ')
         classId = row[1] # location of the classId string
-        print("classId " + classId)
         classDetails = sendRequest(host, port, REQUEST_CLASS_DETAILS_COMMAND, classId)
         reply = QMessageBox.information(window, "Class Information", classDetails)
-
+        return reply.exec_()
 
    # fill up list with courses
     courses = sendRequest(host, port, REQUEST_COURSES_COMMAND, "")
