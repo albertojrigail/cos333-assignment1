@@ -47,16 +47,6 @@ def main(argv):
     listWidget.setItemAlignment(Qt.AlignLeft)
     listWidget.resize(screenSize.width()//2, screenSize.height()//4)
 
-    # on item changed, highlight it
-    previous = None
-
-    def ItemChanged():
-        if previous is not None:
-            previous.setBackground(QBrush(Qt.white, Qt.SolidPattern))
-        item = listWidget.currentItem()
-        item.setBackground(QBrush(Qt.blue, Qt.SolidPattern))
-        previous = item
-
     # on double click, show class details
     def ItemDobleClicked():
         item = listWidget.currentItem()
@@ -71,8 +61,6 @@ def main(argv):
             # message box formatting and return
             reply = QMessageBox.information(window, "Class Information", classDetails)
     listWidget.itemActivated.connect(ItemDobleClicked)
-    listWidget.itemSelectionChanged.connect(ItemChanged)
-
 
     # fill the list with courses that match with "arguments"
     def updateList(arguments):
