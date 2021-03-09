@@ -76,9 +76,7 @@ def main(argv):
                 for course in courses:
                     currentItem = QListWidgetItem(course)
                     currentItem.setFont(font)
-                    listWidget.addItem(currentItem)
-    #initial call
-    updateList("")        
+                    listWidget.addItem(currentItem)      
 
     # CREATE TOP FORM WITH INPUT FIELDS AND BUTTON
     formWidgetLayout = QVBoxLayout()
@@ -135,6 +133,12 @@ def main(argv):
     window.setCentralWidget(frame)
     window.resize(screenSize.width()//2, screenSize.height()//2)
     window.show()
+
+
+    # GET COURSES
+    #initial call
+    updateList("")  
+
     exit(app.exec_())
 
 if __name__ == '__main__':
