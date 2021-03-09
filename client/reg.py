@@ -45,6 +45,7 @@ def main(argv):
     listWidget.setVerticalScrollBar(verticalScrollbar) 
     listWidget.setHorizontalScrollBar(horizontalScrollbar) 
     listWidget.setItemAlignment(Qt.AlignLeft)
+    listWidget.resize(screenSize.width()//2, screenSize.height()//4)
     
 
     # on double click, show class details
@@ -56,7 +57,6 @@ def main(argv):
         try:
             classDetails = sendRequest(host, port, REQUEST_CLASS_DETAILS_COMMAND, classId)
         except Exception as e:
-            print(argv[0] + ":", e, file=stderr)
             reply = QMessageBox.critical(window, "Error", str(e))
         else:
             # message box formatting and return
@@ -69,7 +69,6 @@ def main(argv):
         try:
             courses = sendRequest(host, port, REQUEST_COURSES_COMMAND, arguments)
         except Exception as e:
-            print(argv[0] + ":", e, file=stderr)
             reply = QMessageBox.critical(window, "Error", str(e))
         else:
             if courses is not None:
@@ -98,6 +97,7 @@ def main(argv):
     formWidgetLayout.addWidget(submitButton)
     formWidgetFrame = QFrame()
     formWidgetFrame.setLayout(formWidgetLayout)
+    formWidgetFrame.resize(screenSize.width()//2, screenSize.height()*3//4)
 
     # set up submitting logic
     def submitQuery():
