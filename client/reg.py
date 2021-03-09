@@ -134,9 +134,9 @@ def main(argv):
         updateList(args)
     submitButton.clicked.connect(submitQuery)
     deptEdit.returnPressed.connect(submitQuery)
-    numEdit.itemActivated.connect(submitQuery)
-    areaEdit.itemActivated.connect(submitQuery)
-    titleEdit.itemActivated.connect(submitQuery)
+    numEdit.returnPressed.connect(submitQuery)
+    areaEdit.returnPressed.connect(submitQuery)
+    titleEdit.returnPressed.connect(submitQuery)
 
 
     # ADD FORM AND LIST TO LAYOUT
