@@ -59,8 +59,13 @@ def main(argv):
         row = text.split(' ')
         classId = row[1] # location of the classId string
         classDetails = sendRequest(host, port, REQUEST_CLASS_DETAILS_COMMAND, classId)
-        reply = QMessageBox.information(window, "Class Information", classDetails)
-        reply.setFont(font)
+
+        # message box formatting and return
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setWindowTitle("Class Information")
+        msg.setText(classDetails)
+        retval = msg.exec_()
 
    # fill up list with courses
     listWidget.itemDoubleClicked.connect(ItemDobleClicked)
