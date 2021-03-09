@@ -22,12 +22,13 @@ def getCourse(args):
     
     # parse arguments
     print("getCourse")
-    commandLine = "regserver.py " + args
-    commandLine.strip()
-    argv = commandLine.split(" ")
-    print(argv)
-    arguments = parser.parse_args(argv)
-    print(arguments)
+    if args == "":
+        arguments = parser.parse_args(args)
+    else:
+        commandLine = args
+        commandLine.strip()
+        argv = commandLine.split(" ")
+        arguments = parser.parse_args(args)
     arguments = [arguments.d, arguments.n, arguments.a, arguments.t]
 
     # no exception catching here
