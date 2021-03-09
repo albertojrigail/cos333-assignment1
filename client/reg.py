@@ -94,9 +94,9 @@ def main(argv):
     titleLabel = QLabel()
 
     fieldsLayout.addRow(deptLabel, deptEdit)
-    fieldsLayout.addRow(numEdit, numLabel)
-    fieldsLayout.addRow(areaEdit, areaEdit)
-    fieldsLayout.addRow(titleEdit, titleEdit)
+    fieldsLayout.addRow(numLabel, numEdit)
+    fieldsLayout.addRow(areaLabel, areaEdit)
+    fieldsLayout.addRow(titleLabel, titleEdit)
 
     fieldFrame = QFrame()
     fieldFrame.setLayout(fieldsLayout)
