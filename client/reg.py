@@ -57,6 +57,7 @@ def main(argv):
         item = listWidget.currentItem()
         text = str(item.text())
         row = text.split(' ')
+        print('row', row)
         classId = row[0]
         print("classId " + classId)
         classDetails = sendRequest(host, port, REQUEST_CLASS_DETAILS_COMMAND, classId)
