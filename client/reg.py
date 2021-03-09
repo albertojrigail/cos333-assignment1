@@ -80,6 +80,7 @@ def main(argv):
     # CREATE TOP FORM WITH INPUT FIELDS AND BUTTON
     formWidgetLayout = QHBoxLayout()
     fieldsLayout = QFormLayout()
+    fieldsLayout.setLabelAlignment(Qt.AlignRight)
     formWidgetLayout.setSpacing(0)
     fieldsLayout.setSpacing(0)
     formWidgetLayout.setContentsMargins(0, 0, 0, 0)
