@@ -95,7 +95,7 @@ def main(argv):
         arguments =""
         # set up arguments
         updateList(arguments)
-    submitButton.clicked.connect()
+    submitButton.clicked.connect(submitQuery)
 
 
     # ADD FORM AND LIST TO LAYOUT
