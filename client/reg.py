@@ -66,7 +66,7 @@ def main(argv):
             # message box formatting and return
             reply = QMessageBox.information(window, "Class Information", classDetails)
     listWidget.itemActivated.connect(ItemDobleClicked)
-    listWidget.itemChanged.connect(ItemChanged)
+    listWidget.itemSelectionChanged.connect(ItemChanged)
 
 
     # fill the list with courses that match with "arguments"

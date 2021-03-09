@@ -19,7 +19,6 @@ def sendRequest(host, port, requestName, arguments):
     inFlo = sock.makefile(mode = 'rb')
 
     # send request
-    print(arguments)
     dump([requestName, arguments], outFlo)
     outFlo.flush()
     print("Sent command:", requestName, end="")
