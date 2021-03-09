@@ -4,16 +4,6 @@
 # classdetails.py
 # Author: Alberto Rigail
 #-----------------------------------------------------------------------
-import textwrap
-
-def _strWrapper(string):
-    returnString = ""
-    wrapper = textwrap.TextWrapper(width=72)
-    lines = wrapper.wrap(string)
-    for i in range(len(lines)):
-        returnString += lines[i] + "\n"
-    return returnString
-
 class ClassDetails:
 
     def __init__(self, courseId, days, starttime, endtime, \
@@ -49,18 +39,16 @@ class ClassDetails:
         returnString += "Area: " + self._area + "\n\n"
         
         # title
-        returnString += _strWrapper("Title: " + self._title)
-        returnString += "\n"
+        returnString += "Title: " + self._title + '\n\n'
         
         # description
-        returnString += _strWrapper("Description: " + self._descrip)
-        returnString += "\n"
+        returnString += "Description: " + self._descrip + "\n\n"
+
         # prereqs
-        returnString += _strWrapper("Prerequisites: " + self._prereqs)
-        returnString += "\n"
+        returnString += "Prerequisites: " + self._prereqs + "\n\n"
         
         #professors
         if self._profs is not None :
             for i in range(len(self._profs)):
-                returnString += _strWrapper("Professor: " + self._profs[i])
+                returnString += "Professor: " + self._profs[i] + "\n"
         return returnString
