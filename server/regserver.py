@@ -62,7 +62,7 @@ def main(argv):
         port = int(argv[1])
         serverSock = socket()
         print('Opened server socket')
-        serverSock.setsockopt(SOL_SOCKET, SO_RE USEADDR, 1)
+        serverSock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
         serverSock.bind(('', port))
         print('Bound server socket to port')
         serverSock.listen()
