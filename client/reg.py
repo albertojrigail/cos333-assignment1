@@ -67,7 +67,7 @@ def main(argv):
         for course in courses:
             currentItem = QListWidgetItem(course)
             currentItem.setFont(font)
-            listWidget.itemDoubleClicked.connect(ItemDobleClicked(host, port, listWidget))
+            listWidget.itemDoubleClicked.connect(ItemDobleClicked)
             listWidget.addItem(currentItem)
 
 
