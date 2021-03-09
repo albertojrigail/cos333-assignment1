@@ -22,7 +22,7 @@ def sendRequest(host, port, requestName, arguments):
     print(arguments)
     dump([requestName, arguments], outFlo)
     outFlo.flush()
-    print("Sent command:", requestName)
+    print("Sent command:", requestName, end="")
 
     # read response
     responseData = load(inFlo)
