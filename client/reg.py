@@ -21,11 +21,6 @@ REQUEST_CLASS_DETAILS_COMMAND = "getDetail"
 #-----------------------------------------------------------------------
 
 # this function makes a list widget, amnd calls 
-
-
-def getDetailsPopup(host, port, classId):
-    return None
-
 def main(argv):
     # PARSE ARGUMENTS
     parser = argparse.ArgumentParser(description="Client for the registrar application")
@@ -58,21 +53,30 @@ def main(argv):
         text = str(item.text())
         row = text.split(' ')
         classId = row[1] # location of the classId string
-        classDetails = sendRequest(host, port, REQUEST_CLASS_DETAILS_COMMAND, classId)
-
-        # message box formatting and return
-        reply = QMessageBox.information(window, "Class Information", classDetails)
+        try:
+            classDetails = sendRequest(host, port, REQUEST_CLASS_DETAILS_COMMAND, classId)
+        except Exception as e:
+            print(argv[0] + ":", e, file=stderr)
+            reply = QMessageBox.critical(window, "Error", str(e))
+        else:
+            # message box formatting and return
+            reply = QMessageBox.information(window, "Class Information", classDetails)
     listWidget.itemDoubleClicked.connect(ItemDobleClicked)
 
     # fill the list with courses that match with "arguments"
     def updateList(arguments):
         listWidget.clear()
-        courses = sendRequest(host, port, REQUEST_COURSES_COMMAND, arguments)
-        if courses is not None:
-            for course in courses:
-                currentItem = QListWidgetItem(course)
-                currentItem.setFont(font)
-                listWidget.addItem(currentItem)
+        try:
+            courses = sendRequest(host, port, REQUEST_COURSES_COMMAND, arguments)
+        except Exception as e:
+            print(argv[0] + ":", e, file=stderr)
+            reply = QMessageBox.critical(window, "Error", str(e))
+        else:
+            if courses is not None:
+                for course in courses:
+                    currentItem = QListWidgetItem(course)
+                    currentItem.setFont(font)
+                    listWidget.addItem(currentItem)
     #initial call
     updateList("")        
 

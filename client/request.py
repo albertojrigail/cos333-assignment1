@@ -25,8 +25,10 @@ def sendRequest(host, port, requestName, arguments):
     print("Sent request")
 
     # read response
-    responseString = load(inFlo)
+    responseData = load(inFlo)
     print("Read response and closed socket")
     sock.close()
-    return responseString
+    if responseData[0] != 200:
+        raise Exception(responseData[1])
+    return responseData[1]
     

@@ -10,6 +10,7 @@ from socket import socket, SOL_SOCKET, SO_REUSEADDR
 from pickle import dump, load
 from getcourse import getCourse
 from getclassdetails import getClassDetails
+from constants import *
 import argparse
 
 #-----------------------------------------------------------------------
@@ -22,16 +23,29 @@ def handleClient(sock):
     outFlo = sock.makefile(mode='wb')
 
     # call helper functions, and dump requested objects
-    print("Received command: " + request)
-    print("Received argumments: " + arguments)
     if request == "getOverviews":
         courses = getCourse(arguments)
-        dump(courses, outFlo)
+        dump([SUCCESS_CODE, courses], outFlo)
     elif request == "getDetail":
         classDetails = getClassDetails(arguments)
-        dump(classDetails, outFlo)
+        dump([SUCCESS_CODE, classDetails], outFlo)
 
     # send information back
+    outFlo.flush()
+
+#-----------------------------------------------------------------------
+
+def handleError(sock, exception):
+    outFlo = sock.makefile(mode='wb')
+    text = str(exception)
+    textList = text.split(" ")
+   
+    if textList[0] == "database" or textList[0] == "file":
+        dump([ERROR_CODE, DATABASE_ERROR_MESSAGE], outFlo)
+    elif textList[0] == "no":
+        dump([ERROR_CODE, CLASSID_ERROR_MESSAGE], outFlo)
+    else:
+        dump([ERROR_CODE, DATABASE_ERROR_MESSAGE], outFlo)
     outFlo.flush()
  
 #-----------------------------------------------------------------------
@@ -61,7 +75,9 @@ def main(argv):
                 sock.close()
                 print('Closed socket')
             except Exception as e:
-                print("Handling exception!")
+                handleError(sock, e)
+                sock.close()
+                print('Closed socket')
                 print(argv[0] + ":", e, file=stderr)
 
     except Exception as e:
