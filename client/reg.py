@@ -88,10 +88,10 @@ def main(argv):
     areaEdit = QLineEdit()
     titleEdit = QLineEdit()
     
-    deptLabel = QLabel()
-    numLabel = QLabel()
-    areaLabel = QLabel()
-    titleLabel = QLabel()
+    deptLabel = QLabel("Dept:")
+    numLabel = QLabel("Number:")
+    areaLabel = QLabel("Area:")
+    titleLabel = QLabel("Title:")
 
     fieldsLayout.addRow(deptLabel, deptEdit)
     fieldsLayout.addRow(numLabel, numEdit)
