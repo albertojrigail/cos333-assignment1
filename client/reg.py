@@ -133,7 +133,7 @@ def main(argv):
         args = arguments.strip()
         updateList(args)
     submitButton.clicked.connect(submitQuery)
-    deptEdit.itemActivated.connect(submitQuery)
+    deptEdit.returnPressed.connect(submitQuery)
     numEdit.itemActivated.connect(submitQuery)
     areaEdit.itemActivated.connect(submitQuery)
     titleEdit.itemActivated.connect(submitQuery)
