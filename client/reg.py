@@ -48,9 +48,14 @@ def main(argv):
     listWidget.resize(screenSize.width()//2, screenSize.height()//4)
 
     # on item changed, highlight it
+    previous = None
+
     def ItemChanged():
+        if previous is not None:
+            previous.setBackground(QBrush(Qt.white, Qt.SolidPattern))
         item = listWidget.currentItem()
         item.setBackground(QBrush(Qt.blue, Qt.SolidPattern))
+        previous = item
 
     # on double click, show class details
     def ItemDobleClicked():
