@@ -133,6 +133,7 @@ def main(argv):
         args = arguments.strip()
         updateList(args)
     submitButton.clicked.connect(submitQuery)
+    submitButton.setAutoDefault(True)
     deptEdit.returnPressed.connect(submitQuery)
     numEdit.returnPressed.connect(submitQuery)
     areaEdit.returnPressed.connect(submitQuery)
