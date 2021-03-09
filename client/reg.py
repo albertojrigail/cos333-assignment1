@@ -9,7 +9,7 @@ from sys import argv, stderr, exit
 from socket import socket
 from pickle import load, dump
 import argparse
-from PyQt5.QtWidgets import QApplication, QFrame, QLabel
+from PyQt5.QtWidgets import QApplication, QFrame, QLabel, QFont
 from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QDesktopWidget, QListWidget, QScrollBar, QListWidgetItem
 from PyQt5.QtCore import Qt
 
@@ -45,11 +45,15 @@ def getListWidget(host, port, arguments):
     # create list widget, and add courses that match
     listWidget = QListWidget()
     courses = sendRequest(host, port, REQUEST_COURSES_COMMAND, arguments)
+    
+    # set font
+    font = QFont('Courier', 10) 
 
     # fill up list with courses
     if courses is not None:
         for course in courses:
             currentItem = QListWidgetItem(course)
+            currentItem.setFont(font)
             listWidget.addItem(currentItem)
 
     # set scrollbars
@@ -57,7 +61,10 @@ def getListWidget(host, port, arguments):
     horizontalScrollbar = QScrollBar()
     listWidget.setVerticalScrollBar(verticalScrollbar) 
     listWidget.setHorizontalScrollBar(horizontalScrollbar) 
+
+    # set alignment
     listWidget.setItemAlignment(Qt.AlignLeft)
+    
     return listWidget
 
 
