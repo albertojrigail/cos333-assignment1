@@ -21,7 +21,9 @@ def getCourse(args):
     parser.add_argument('-t', metavar='title', type=str, help="show only those classes whose course title contains title", nargs=1)
     
     # parse arguments
+    print("getCourse")
     arguments = parser.parse_args(args)
+    print(arguments)
     arguments = [arguments.d, arguments.n, arguments.a, arguments.t]
 
     # no exception catching here
