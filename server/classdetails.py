@@ -33,7 +33,7 @@ class ClassDetails:
         # dept and number
         if self._depts is not None :
             for i in range(len(self._depts)):
-                returnString += _strWrapper("Dept and Number: " + self._depts[i])
+                returnString += "Dept and Number: " + self._depts[i] + "\n"
         
         returnString += "\n"
         returnString += "Area: " + self._area + "\n\n"
