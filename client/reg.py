@@ -62,12 +62,12 @@ def main(argv):
         reply = QMessageBox.information(window, "Class Information", classDetails)
 
    # fill up list with courses
+    listWidget.itemDoubleClicked.connect(ItemDobleClicked)
     courses = sendRequest(host, port, REQUEST_COURSES_COMMAND, "")
     if courses is not None:
         for course in courses:
             currentItem = QListWidgetItem(course)
             currentItem.setFont(font)
-            listWidget.itemDoubleClicked.connect(ItemDobleClicked)
             listWidget.addItem(currentItem)
 
 
