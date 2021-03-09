@@ -80,6 +80,7 @@ def main(argv):
                 print('Closed socket')
                 print(argv[0] + ":", e, file=stderr)
 
+    # I can cause this code to execute only by making the client erroneous.
     except Exception as e:
         print(argv[0] + ":", e, file=stderr)
         exit(1)
