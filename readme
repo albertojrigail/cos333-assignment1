@@ -2,28 +2,33 @@ ajrc
 
 Name: Alberto Rigail
 
-Assigment No: 1
+Assigment No: 2
 
 Contribution:
-I worked solo on this assignment, by coding reg.py and regdetails.py as specified in the course website. reg.py start by parsing arguments using argparse (sending errors when needed). Then, it creates a SQL prepared statement that is customized to the optional arguments received (using string concatenation). It then checks whether the database is in the current directory, and if so, queries the data. The program ends by printing out the classes that match the search, using the text wrap library for proper formatting.
+I worked solo on this assignment, by coding the programs as indicated by the website specifications.  I was able to code a modularized system that is divided into two sections, the client and server.
 
-regdetails.py has a similar execution, except that it does a more complex query for getting all the columns needed. Note that if the id given to the program does not match to a valid classid, regdetails.py yields an error message and returns. Otherwise, the data is fetched and printed in the specified format.
+- Server:
+I started by modularizing my previous code, and creating a database class in database.py, I also created functions for querying courses and classes, by creating the classes Course and ClassDetails for the objects, and the methods getClassDetails and getCourse for querying and formatting these requests. Finally in regserver.py, I coded the socket opening and closure in the main function, and wrote helper methods handleClient() and handleError(). The function handleClient() calls load to read a request from the client, which contains a command string and a list of arguments, calls the helper functions from other modules, and returns a success code and the requested object using dump. If the request resulted in an error, the program will raise an exception, which will be caught in the main function of regserver.py, which will call handleError(). This function will call dump to send an error code, and a customized error message.
 
-For testing, I wrote automated test files testreg.py and testregdetails.py, that compare the output of reg.py and regdetails.py with their respective reference programs. I used the system module and diff command for these comparisons, which prints the differences to stdout. These automated tests also perform coverage testing for the regular cases, and I finished coverage for boundary tests by writing the commands on the terminal.
+- Client:
+The client code is much simpler, and is divided into two. On one hand, reg.py contains all the user interface code in PyQt5, plus event handling. On the other hand, request.py contains the functions that interact with the server, by creating a socket, sending a request, reading a response, and closing the socket.
+
+Combined, the server and client code make up a system that is modular and satisfies all the main and edge use cases described in the assignment page.
+
 
 External help:
 I received no external help in this assignment.
 
 Sources referenced:
 In this assignment, I followed the course policies and guidelines for referencing external information. Moreover, I used the following sources:
-- Python Documentation
-- https://www.geeksforgeeks.org/textwrap-text-wrapping-filling-python/
-- https://www.geeksforgeeks.org/convert-integer-to-string-in-python/
-- https://towardsdatascience.com/learn-enough-python-to-be-useful-argparse-e482e1764e05
-- https://www.w3schools.com/sql/sql_like.asp
-- https://www.journaldev.com/23763/python-remove-spaces-from-string
+- Python and PyQt5 Documentation
+- https://www.sqlitetutorial.net/sqlite-delete/
+- https://stackoverflow.com/questions/4308182/getting-the-exception-value-in-python/4308202
+- https://www.tutorialspoint.com/pyqt/pyqt_qlineedit_widget.htm
+- https://pythonspot.com/pyqt5-textbox-example/
+- https://pythonspot.com/pyqt5-messagebox/
 
-Time spent in this assignment: 10 hours
+Time spent in this assignment: 12 hours
 
 My assessment:
-Before taking this course, I had no experience in SQL databases and their use with python. This assignment thus resulted incredibly helpful not only to understand the relations between different tables in a database, but also to learn best practices in querying information from them. It was also helpful to learn modules such as textwrap and argparse, which I will use in future programs. I think this assignment serves its purpose fittingly and I wouldn't change anything for future years.
+This assignment helped me to truly understand network programming and building a functional user interface. Although the PyQt5 section of this assignment was tedious, working through a lot of code helped me to better modularize our code and testing the system's components in isolation. I think this assignment fits this course well, and I would recommend keeping it for future semester.
