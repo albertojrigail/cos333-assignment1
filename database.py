@@ -43,16 +43,16 @@ class Database:
         optionalArguments = []
         if(dept is not None):
             stmtStr = stmtStr + ' AND INSTR(LOWER(crosslistings.dept), ?)'
-            optionalArguments.append(str.lower(dept[0].strip()))
+            optionalArguments.append(str.lower(dept.strip()))
         if(num is not None):
             stmtStr = stmtStr + ' AND INSTR(LOWER(crosslistings.coursenum), ?)'
-            optionalArguments.append(num[0])
+            optionalArguments.append(num)
         if(area is not None):
             stmtStr = stmtStr + ' AND INSTR(LOWER(courses.area), ?)'
-            optionalArguments.append(str.lower(area[0].strip()))
+            optionalArguments.append(str.lower(area.strip()))
         if(title is not None):
             stmtStr = stmtStr + ' AND INSTR(LOWER(courses.title), ?)'
-            optionalArguments.append(str.lower(title[0].strip()))
+            optionalArguments.append(str.lower(title.strip()))
         stmtStr = stmtStr + ' ORDER BY dept, coursenum, classid'
 
         # execute statement
