@@ -32,6 +32,10 @@ class Database:
         num = arguments[1]
         area = arguments[2]
         title = arguments[3]
+        print("dept", dept)
+        print("num", num)
+        print("area", area)
+        print("title", title)
 
         # create a prepared statement and substitute values.
         stmtStr = 'SELECT classid, dept, coursenum, area, title ' + \
