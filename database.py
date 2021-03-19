@@ -32,10 +32,6 @@ class Database:
         num = arguments[1]
         area = arguments[2]
         title = arguments[3]
-        print("dept", dept)
-        print("num", num)
-        print("area", area)
-        print("title", title)
 
         # create a prepared statement and substitute values.
         stmtStr = 'SELECT classid, dept, coursenum, area, title ' + \
@@ -47,22 +43,23 @@ class Database:
         optionalArguments = []
         if(dept is not None):
             stmtStr = stmtStr + ' AND INSTR(LOWER(crosslistings.dept), ?)'
-            optionalArguments.append(str.lower(dept[0]))
+            optionalArguments.append(str.lower(dept[0].strip()))
         if(num is not None):
             stmtStr = stmtStr + ' AND INSTR(LOWER(crosslistings.coursenum), ?)'
             optionalArguments.append(num[0])
         if(area is not None):
             stmtStr = stmtStr + ' AND INSTR(LOWER(courses.area), ?)'
-            optionalArguments.append(str.lower(area[0]))
+            optionalArguments.append(str.lower(area[0].strip()))
         if(title is not None):
             stmtStr = stmtStr + ' AND INSTR(LOWER(courses.title), ?)'
-            optionalArguments.append(str.lower(title[0]))
+            optionalArguments.append(str.lower(title[0].strip()))
         stmtStr = stmtStr + ' ORDER BY dept, coursenum, classid'
 
         # execute statement
         cursor = self._connection.cursor()
         if(dept or num or area or title):
             cursor.execute(stmtStr, optionalArguments)
+            print(optionalArguments)
         else:
             cursor.execute(stmtStr)
 
