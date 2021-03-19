@@ -13,23 +13,18 @@ import argparse
 #-----------------------------------------------------------------------
 
 def getCourse(args):       
-    # set up argparse with optional arguments
-    parser = argparse.ArgumentParser(description="Registrar application: show overviews of classes", allow_abbrev=False)
-    parser.add_argument('-d', metavar='dept', type=str, help="show only those classes whose department contains dept", nargs=1)
-    parser.add_argument('-n', metavar='num', type=str, help="show only those classes whose course number contains num", nargs=1)
-    parser.add_argument('-a', metavar='area', type=str, help="show only those classes whose distrib area contains area", nargs=1)
-    parser.add_argument('-t', metavar='title', type=str, help="show only those classes whose course title contains title", nargs=1)
-    
     # parse arguments
     if args == "":
-        arguments = parser.parse_args(args)
+        arguments = [None]*4
     else:
-        commandLine = args
-        commandLine.strip()
-        argv = commandLine.split(" ")
-        arguments = parser.parse_args(argv)
-    arguments = [arguments.d, arguments.n, arguments.a, arguments.t]
-
+        argv = args.split(",")
+        arguments = []
+        for arg in argv:
+            if arg == "":
+                arguments.append(None)
+            else:
+                arguments.append(arg)
+    
     # no exception catching here
     # exceptions would be catched by regserver.py
     db = Database()

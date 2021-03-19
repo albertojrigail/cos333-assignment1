@@ -112,20 +112,11 @@ def main(argv):
 
     # set up submitting logic
     def submitQuery():
-        arguments = ""
         dept = deptEdit.text()
         num = numEdit.text()
         area = areaEdit.text()
         title = titleEdit.text()
-
-        if dept != "":
-            arguments += "-d " + dept + " "
-        if num != "":
-            arguments += "-n " + num + " "
-        if area != "":
-            arguments += "-a " + area + " "
-        if title != "":
-            arguments += "-t " + title + " "
+        arguments = dept + "," + num + "," + area + "," + title
         # set up arguments
         args = arguments.strip()
         updateList(args)
