@@ -59,7 +59,6 @@ class Database:
         cursor = self._connection.cursor()
         if(dept or num or area or title):
             cursor.execute(stmtStr, optionalArguments)
-            print(optionalArguments)
         else:
             cursor.execute(stmtStr)
 
