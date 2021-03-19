@@ -27,6 +27,8 @@ def getCourse(args):
     
     # no exception catching here
     # exceptions would be catched by regserver.py
+    print("getCourse")
+    print(arguments)
     db = Database()
     db.connect()
     courses = db.searchCourses(arguments)
