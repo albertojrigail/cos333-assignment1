@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 #-----------------------------------------------------------------------
 # testreg.py
 # Author: Alberto Rigail
