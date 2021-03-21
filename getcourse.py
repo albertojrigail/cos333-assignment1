@@ -14,24 +14,15 @@ import argparse
 
 def getCourse(args):       
     # parse arguments
-    if args == "":
-        arguments = [None]*4
-    else:
-        argv = args.split(",")
-        arguments = []
-        for arg in argv:
-            if arg == "":
-                arguments.append(None)
-            else:
-                arguments.append(arg)
+    arguments = []
+    for arg in args:
+        if arg is not None and arg != "":
+            arguments.append(arg)
+        else:
+            arguments.append(None)
     
-    # no exception catching here
-    # exceptions would be catched by regserver.py
     db = Database()
     db.connect()
     courses = db.searchCourses(arguments)
-    coursesStrings = []
-    for course in courses:
-        coursesStrings.append(str(course))
     db.disconnect()
-    return coursesStrings
+    return courses

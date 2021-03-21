@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+ <html>
+   <head>
+      <title>Registrar's Office Class Search</title>
+   </head>
+   <body>
+      <!--Header-->
+      <h1>Registrar's Office</h1>
+
+      {%- if isError == True -%}
+      {{errorMsg}}
+      {% else %}
+      <!--Class Details-->
+      <hr>
+      <h2>Class Details (class id  {{classId}})</h2>
+      <b>Course Id: </b> {{classDetails.getCourseId()}}<br>
+      <b>Days: </b>{{classDetails.getDays()}}<br>
+      <b>Start time: </b>{{classDetails.getStartTime()}}<br>
+      <b>End time: </b>{{classDetails.getEndTime()}}<br>
+      <b>Building: </b>{{classDetails.getBldg()}}<br>
+      <b>Room: </b>{{classDetails.getRoomnum()}}<br>
+      
+      <!--Course Details-->
+      <hr>
+      <h2>Course Details (course id {{classDetails.getCourseId()}})</h2>
+      {% set depts = classDetails.getDepts()%}
+      {% set profs = classDetails.getProfs()%}
+
+      <!--Departments-->
+      {% for dept in depts %}
+      <b>Dept and Number: </b>{{dept}}<br>
+      {% endfor %}
+
+      <b>Area: </b>{{classDetails.getArea()}}<br>
+      <b>Title: </b>{{classDetails.getTitle()}}<br>
+      <b>Description: </b>{{classDetails.getDescrip()}}<br>
+      <b>Prerequisites: </b>{{classDetails.getPrereqs()}}<br>
+
+      <!--Professors-->
+      {% for prof in profs %}
+      <b>Professor: </b>{{prof}}<br>
+      {% endfor %}
+
+        
+      <!--Footer-->
+      <hr>
+      Click here to do <a href="/?dept={{prevDept}}&num={{prevNum}}&area={{prevArea}}&title={{prevTitle}}">another search.</a>
+      {%- endif %}
+
+      <hr>
+      Created by <a href="https://www.cs.princeton.edu/~rdondero">
+      Bob Dondero</a>
+      <hr>
+   </body>
+ </html>
+
+

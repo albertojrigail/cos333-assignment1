@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+ <html>
+   <head>
+      <title>Registrar's Office Class Search</title>
+   </head>
+   <body>
+      <!--Header-->
+      <h1>Registrar's Office</h1>
+      
+      {%- if isError == True -%}
+      {{errorMsg}}
+      {% else %}
+      <h2>Class Search</h2>
+      <hr>
+      <!--Form questions-->
+      <div class="line">
+          <form method="get">
+              <table>
+                  <tr>
+                      <th style="text-align: right;font-weight: normal;">Dept:</th>
+                      <th>
+                          <input type="text" name="dept" value="{{dept}}" style="border:1px solid;background-color: white;border-radius: 2px;border-color:gray;height: 17.5px;">
+                      </th>
+                  </tr>
+                  <tr>
+                      <th style="text-align: right;font-weight: normal;">Number:</th>
+                      <th>
+                          <input type="text" name="num" value="{{num}}" style="border:1px solid;background-color: white;border-radius: 2px;border-color:gray;height: 17.5px;">
+                      </th>
+                  </tr>
+                  <tr>
+                      <th style="text-align: right;font-weight: normal;">Area:</th>
+                      <th>
+                          <input type="text" name="area" value="{{area}}" style="border:1px solid;background-color: white;border-radius: 2px;border-color:gray;height: 17.5px;">
+                      </th>
+                  </tr>
+                  <tr>
+                      <th style="text-align: right;font-weight: normal;">Title:</th>
+                      <th>
+                          <input type="text" name="title" value="{{title}}" style="border:1px solid;background-color: white;border-radius: 2px;border-color:gray;height: 17.5px;">
+                      </th>
+                  </tr>
+                  <tr>
+                      <th></th>
+                      <th style="align-items: left; text-align:left;">
+                          <input type="submit" value="Submit" style="font-size: 12.5px;">
+                      </th>
+                  </tr>
+              </table> 
+            </form>
+            <hr>
+        </div>
+
+      <!--Search results-->
+      <div>
+          <table>
+              <tr>
+                  <th style="text-align: left;">ClassId</th>
+                  <th style="text-align: left;">Dept</th>
+                  <th style="text-align: left;">Num</th>
+                  <th style="text-align: left;">Area</th>
+                  <th style="text-align: left;">Title</th>
+                </tr>
+                {%    for course in courses: %}
+                <tr>
+                    <th style="text-align: left;font-weight: normal;"><a href="/regdetails?classid={{course.getClassId()}}">{{course.getClassId()}}</a></th>
+                    <th style="text-align: left;font-weight: normal;">{{course.getDept()}}</th>
+                    <th style="text-align: left;font-weight: normal;">{{course.getCrsNum()}}</th>
+                    <th style="text-align: left;font-weight: normal;">{{course.getArea()}}</th>
+                    <th style="text-align: left;font-weight: normal;">{{course.getTitle()}}</th>
+                </tr>
+                {%    endfor %}
+          </table>
+      </div>
+      {%- endif %}
+
+      <!--Footer-->
+      <div class="line">
+        <hr>
+        Created by <a href="https://www.cs.princeton.edu/~rdondero">
+        Bob Dondero</a>
+        <hr>
+      </div>
+   </body>
+ </html>
+
+

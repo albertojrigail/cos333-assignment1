@@ -20,35 +20,39 @@ class ClassDetails:
         self._prereqs = str(prereqs)
         self._depts = depts
         self._profs = profs
-
-    def __str__(self):
-        returnString = "Course Id: " + self._courseId + "\n\n" + \
-            "Days: " + self._days + "\n" + \
-            "Start time: " + self._starttime + "\n" + \
-            "End time: " + self._endtime + "\n" + \
-            "Building: " + self._bldg + "\n" + \
-            "Room: " + self._roomnum + "\n\n"
-
-
-        # dept and number
-        if self._depts is not None :
-            for i in range(len(self._depts)):
-                returnString += "Dept and Number: " + self._depts[i] + "\n"
-        
-        returnString += "\n"
-        returnString += "Area: " + self._area + "\n\n"
-        
-        # title
-        returnString += "Title: " + self._title + '\n\n'
-        
-        # description
-        returnString += "Description: " + self._descrip + "\n\n"
-
-        # prereqs
-        returnString += "Prerequisites: " + self._prereqs + "\n\n"
-        
-        #professors
-        if self._profs is not None :
-            for i in range(len(self._profs)):
-                returnString += "Professor: " + self._profs[i] + "\n"
-        return returnString
+    
+    def getCourseId(self):
+        return self._courseId
+    
+    def getDays(self):
+        return self._days
+    
+    def getStartTime(self):
+        return self._starttime
+    
+    def getEndTime(self):
+        return self._endtime
+    
+    def getBldg(self):
+        return self._bldg
+    
+    def getRoomnum(self):
+        return self._roomnum
+    
+    def getArea(self):
+        return self._area
+    
+    def getTitle(self):
+        return self._title
+    
+    def getDescrip(self):
+        return self._descrip
+    
+    def getPrereqs(self):
+        return self._prereqs
+    
+    def getDepts(self):
+        return self._depts
+    
+    def getProfs(self):
+        return self._profs

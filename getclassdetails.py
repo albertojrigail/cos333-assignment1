@@ -19,4 +19,4 @@ def getClassDetails(classId):
     db.connect()
     currentClass = db.searchClass(classId)
     db.disconnect()
-    return str(currentClass)
+    return currentClass
