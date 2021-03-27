@@ -22,7 +22,27 @@ from constants import *
 workerThread = None
 
 #-----------------------------------------------------------------------
+def request(host, port, requestName, arguments):
+    sock = socket()
+    sock.connect((host, port))
 
+    # Send request      
+    outFlo = sock.makefile(mode='wb')
+    dump([requestName, arguments], outFlo)
+    outFlo.flush()
+    print("Sent command:", requestName)
+
+    # Read response
+    inFlo = sock.makefile(mode='rb')
+    responseData = load(inFlo)
+    code = responseData[0]
+    data = responseData[1]
+    sock.close()
+
+    # return values
+    return code, data
+
+#-----------------------------------------------------------------------
 class WorkerThread (Thread):
 
     def __init__(self, host, port, requestName, arguments, queue):
@@ -39,21 +59,7 @@ class WorkerThread (Thread):
     
     def run(self):
         try:
-            sock = socket()
-            sock.connect((self._host, self._port))
-
-            # Send request      
-            outFlo = sock.makefile(mode='wb')
-            dump([self._requestName, self._arguments], outFlo)
-            outFlo.flush()
-            print("Sent command:", self._requestName)
-
-            # Read response
-            inFlo = sock.makefile(mode='rb')
-            responseData = load(inFlo)
-            code = responseData[0]
-            data = responseData[1]
-            sock.close()
+            code, data = request(self._host, self._port, self._requestName, self._arguments)
             if code != 200:
                 raise Exception(data)
             if self._shouldStop:
@@ -140,16 +146,22 @@ def main(argv):
 
     # on double click, show class details
     def ItemDobleClicked():
-        global workerThread
-        item = listWidget.currentItem()
-        text = str(item.text())
-        row = text.split(' ')
-        classId = row[1]
+        try:
+            item = listWidget.currentItem()
+            text = str(item.text())
+            row = text.split(' ')
+            classId = row[1]
+            code, data = request(host, port, REQUEST_CLASS_DETAILS_COMMAND, classId)
+            if code != 200:
+                raise Exception(data)
 
-        if workerThread is not None:
-            workerThread.stop()
-        workerThread = WorkerThread(host, port, REQUEST_CLASS_DETAILS_COMMAND, classId, queue)
-        workerThread.start()
+            # for getClassDetails, show popup window with text
+            if data is not None:
+                classDetails = data
+                return QMessageBox.information(window, "Class Details", classDetails)
+                
+        except Exception as e:
+            return QMessageBox.critical(window, "Error", str(e))
 
     listWidget.itemActivated.connect(ItemDobleClicked)
 
@@ -201,12 +213,6 @@ def main(argv):
                         listWidget.addItem(currentItem)   
                     
                     listWidget.repaint()
-
-            # for getClassDetails, show popup window with text
-            if requestName == REQUEST_CLASS_DETAILS_COMMAND:
-                if data is not None:
-                    classDetails = data
-                    return QMessageBox.information(window, "Class Details", classDetails)
 
 
     timer = QTimer()
