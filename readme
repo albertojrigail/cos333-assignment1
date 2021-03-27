@@ -2,16 +2,16 @@ ajrc
 
 Name: Alberto Rigail
 
-Assigment No: 2
+Assigment No: 4
 
 Contribution:
 I worked solo on this assignment, by coding the programs as indicated by the website specifications.  I was able to code a modularized system that is divided into two sections, the client and server.
 
 - Server:
-I started by modularizing my previous code, and creating a database class in database.py, I also created functions for querying courses and classes, by creating the classes Course and ClassDetails for the objects, and the methods getClassDetails and getCourse for querying and formatting these requests. Finally in regserver.py, I coded the socket opening and closure in the main function, and wrote helper methods handleClient() and handleError(). The function handleClient() calls load to read a request from the client, which contains a command string and a list of arguments, calls the helper functions from other modules, and returns a success code and the requested object using dump. If the request resulted in an error, the program will raise an exception, which will be caught in the main function of regserver.py, which will call handleError(). This function will call dump to send an error code, and a customized error message.
+I started by looking at pennyserver.py from the programming with concurrent threads lecture, which contained many useful lines of code for this program. I used the functions consumeCpuTime, and handleClient, adapting them to the objects relevant to this program (course and class details). Since my assignment 2 was properly modularized, I could utilize most of the code from pennyserver.py quickly and efficiently. The cux of programming with concurrent threads is located in the main function at lines 131 and 132, where the server spawns a new process to handle a client request. Most of the other functionality is implemented as in assignment 2.
 
 - Client:
-The client code is much simpler, and is divided into two. On one hand, reg.py contains all the user interface code in PyQt5, plus event handling. On the other hand, request.py contains the functions that interact with the server, by creating a socket, sending a request, reading a response, and closing the socket.
+The client code uses threads for concurrent programming, as opposed to processes. Once a relevant event occurs (search for courses or get a class' details), a new thread is spawned. The spawned thread communicates with the server by sending a request, reads and parses the response, and puts the relevant data on a global variable queue. On the main thread, every 1000 milliseconds the function pollQueue is activated, which gets a response from the queue, and displays the relevant changes in the user interface.
 
 Combined, the server and client code make up a system that is modular and satisfies all the main and edge use cases described in the assignment page.
 
@@ -20,15 +20,11 @@ External help:
 I received no external help in this assignment.
 
 Sources referenced:
-In this assignment, I followed the course policies and guidelines for referencing external information. Moreover, I used the following sources:
-- Python and PyQt5 Documentation
-- https://www.sqlitetutorial.net/sqlite-delete/
-- https://stackoverflow.com/questions/4308182/getting-the-exception-value-in-python/4308202
-- https://www.tutorialspoint.com/pyqt/pyqt_qlineedit_widget.htm
-- https://pythonspot.com/pyqt5-textbox-example/
-- https://pythonspot.com/pyqt5-messagebox/
+- the PennyThreads5 program from lecture
+- Python documentation
+https://docs.python.org/3/library/multiprocessing.html
 
-Time spent in this assignment: 12 hours
+Time spent in this assignment: 3.5 hours
 
 My assessment:
-This assignment helped me to truly understand network programming and building a functional user interface. Although the PyQt5 section of this assignment was tedious, working through a lot of code helped me to better modularize our code and testing the system's components in isolation. I think this assignment fits this course well, and I would recommend keeping it for future semester.
+This assignment helped me to truly understand concurrent threads and processes programming, in very little time. It was an efficient way to reinforce the lecture material, and I enjoyed coding this assignment. I think this assignment fits this course well, and I would recommend keeping it for future semester.
