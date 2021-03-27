@@ -105,6 +105,10 @@ def main(argv):
     parser.add_argument('delay', type=int, help="the seconds regserver.py should wait", nargs=1)
     arguments = parser.parse_args(argv[1:])
 
+    # Print the OS and CPU count of the computer.
+    print('OS:', name)
+    print('CPU count:', cpu_count())
+
     # If not running on MS Windows, then install joinChildren as
     # the handler for SIGCHLD signals.
     if name != 'nt':
