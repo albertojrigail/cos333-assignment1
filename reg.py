@@ -6,21 +6,67 @@
 #-----------------------------------------------------------------------
 
 from sys import argv, stderr, exit
-from request import sendRequest
 import argparse
-from PyQt5.QtWidgets import QApplication, QFrame, QLabel, QLineEdit, QPushButton, QFormLayout
-from PyQt5.QtWidgets import QMainWindow, QGridLayout, QVBoxLayout,QHBoxLayout, QDesktopWidget, QListWidget, QScrollBar, QListWidgetItem, QMessageBox
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QFont, QBrush
+from threading import Thread
+from socket import socket
+from pickle import load, dump
+from PyQt5.QtWidgets import QApplication, QFrame, QLabel
+from PyQt5.QtWidgets import QLineEdit, QPushButton, QFormLayout
+from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QHBoxLayout, QDesktopWidget
+from PyQt5.QtWidgets import QListWidget, QScrollBar, QListWidgetItem, QMessageBox
+from queue import Queue
+from PyQt5.QtCore import QTimer, Qt
+from PyQt5.QtGui import QFont
+from constants import *
+
+workerThread = None
 
 #-----------------------------------------------------------------------
 
-REQUEST_COURSES_COMMAND = "getOverviews"
-REQUEST_CLASS_DETAILS_COMMAND = "getDetail"
+class WorkerThread (Thread):
 
+    def __init__(self, host, port, requestName, arguments, queue):
+        Thread.__init__(self)
+        self._host = host
+        self._port = port
+        self._requestName = requestName 
+        self._arguments = arguments
+        self._queue = queue
+        self._shouldStop = False
+
+    def stop(self):
+        self._shouldStop = True
+    
+    def run(self):
+        try:
+            sock = socket()
+            sock.connect((self._host, self._port))
+
+            # Send request      
+            outFlo = sock.makefile(mode='wb')
+            dump([self._requestName, self._arguments], outFlo)
+            outFlo.flush()
+            print("Sent command:", self._requestName)
+
+            # Read response
+            inFlo = sock.makefile(mode='rb')
+            responseData = load(inFlo)
+            code = responseData[0]
+            data = responseData[1]
+            sock.close()
+            if code != 200:
+                raise Exception(data)
+            if self._shouldStop:
+                return
+            self._queue.put([True, self._requestName, data])
+        except Exception as e:
+            if self._shouldStop:
+                return
+            self._queue.put([False, self._requestName, str(e)])
+
+    
 #-----------------------------------------------------------------------
 
-# this function makes a list widget, amnd calls 
 def main(argv):
     # PARSE ARGUMENTS
     parser = argparse.ArgumentParser(description="Client for the registrar application")
@@ -28,16 +74,18 @@ def main(argv):
     parser.add_argument('port', type=int, help="the port at which the server is listening", nargs=1)
     arguments = parser.parse_args(argv[1:])
     host = arguments.host[0]
-    port = arguments.port[0]
+    port = int(arguments.port[0])
+
+    queue = Queue()
     
-    # CREATE INITIAL INTERFACE
+    # Create and lay out the widgets
+
     app = QApplication(argv)
     layout = QVBoxLayout()
     layout.setSpacing(0)
     layout.setContentsMargins(0, 0, 0, 0)
     screenSize = QDesktopWidget().screenGeometry()
 
-    # CREATE LIST WITH COURSES
     listWidget = QListWidget()
     font = QFont('Courier', 10) 
     verticalScrollbar = QScrollBar()
@@ -47,36 +95,6 @@ def main(argv):
     listWidget.setItemAlignment(Qt.AlignLeft)
     listWidget.resize(screenSize.width()//2, screenSize.height()//4)
 
-    # on double click, show class details
-    def ItemDobleClicked():
-        item = listWidget.currentItem()
-        text = str(item.text())
-        row = text.split(' ')
-        classId = row[1] # location of the classId string
-        try:
-            classDetails = sendRequest(host, port, REQUEST_CLASS_DETAILS_COMMAND, classId)
-        except Exception as e:
-            reply = QMessageBox.critical(window, "Error", str(e))
-        else:
-            # message box formatting and return
-            reply = QMessageBox.information(window, "Class Details", classDetails)
-    listWidget.itemActivated.connect(ItemDobleClicked)
-
-    # fill the list with courses that match with "arguments"
-    def updateList(arguments):
-        listWidget.clear()
-        try:
-            courses = sendRequest(host, port, REQUEST_COURSES_COMMAND, arguments)
-        except Exception as e:
-            reply = QMessageBox.critical(window, "Error", str(e))
-        else:
-            if courses is not None:
-                for course in courses:
-                    currentItem = QListWidgetItem(course)
-                    currentItem.setFont(font)
-                    listWidget.addItem(currentItem)      
-
-    # CREATE TOP FORM WITH INPUT FIELDS AND BUTTON
     formWidgetLayout = QHBoxLayout()
     fieldsLayout = QFormLayout()
     fieldsLayout.setLabelAlignment(Qt.AlignRight)
@@ -103,49 +121,105 @@ def main(argv):
 
     fieldFrame = QFrame()
     fieldFrame.setLayout(fieldsLayout)
-    submitButton = QPushButton("Submit")
     formWidgetLayout.addWidget(fieldFrame)
-    formWidgetLayout.addWidget(submitButton)
     formWidgetFrame = QFrame()
     formWidgetFrame.setLayout(formWidgetLayout)
     formWidgetFrame.resize(screenSize.width()//2, screenSize.height()//4)
-
-    # set up submitting logic
-    def submitQuery():
-        dept = deptEdit.text()
-        num = numEdit.text()
-        area = areaEdit.text()
-        title = titleEdit.text()
-        arguments = dept + "," + num + "," + area + "," + title
-        # set up arguments
-        args = arguments.strip()
-        updateList(args)
-    submitButton.clicked.connect(submitQuery)
-    submitButton.setAutoDefault(True)
-    deptEdit.returnPressed.connect(submitQuery)
-    numEdit.returnPressed.connect(submitQuery)
-    areaEdit.returnPressed.connect(submitQuery)
-    titleEdit.returnPressed.connect(submitQuery)
-
-
-    # ADD FORM AND LIST TO LAYOUT
+    
     layout.addWidget(formWidgetFrame)
     layout.addWidget(listWidget)
 
-    # GENERAL WINDOW SETUP
     frame = QFrame()
     frame.setLayout(layout)
     window = QMainWindow()
     window.setWindowTitle('Princeton University Class Search')
     window.setCentralWidget(frame)
     window.resize(screenSize.width()//2, screenSize.height()//2)
+
+    # Handle signals
+
+    # on double click, show class details
+    def ItemDobleClicked():
+        global workerThread
+        item = listWidget.currentItem()
+        text = str(item.text())
+        row = text.split(' ')
+        classId = int(row[1])
+
+        if workerThread is not None:
+            workerThread.stop()
+        workerThread = WorkerThread(host, port, REQUEST_CLASS_DETAILS_COMMAND, classId, queue)
+        workerThread.start()
+
+    listWidget.itemActivated.connect(ItemDobleClicked)
+
+
+    def submitSlot():
+        global workerThread
+        dept = deptEdit.text()
+        num = numEdit.text()
+        area = areaEdit.text()
+        title = titleEdit.text()
+        arguments = dept + "," + num + "," + area + "," + title
+        args = arguments.strip()
+
+        if workerThread is not None:
+            workerThread.stop()
+        workerThread = WorkerThread(host, port, REQUEST_COURSES_COMMAND, args, queue)
+        workerThread.start()
+
+    deptEdit.textChanged.connect(submitSlot)
+    numEdit.textChanged.connect(submitSlot)
+    areaEdit.textChanged.connect(submitSlot)
+    titleEdit.textChanged.connect(submitSlot)
+    
+    #-------------------------------------------------------------------
+    # Create a timer that polls the queue.
+
+    def pollQueue():
+        # read responses and render events properly
+        while not queue.empty():
+            response = queue.get()
+            successful = response[0]
+            requestName = response[1]
+            data = response[2]
+
+            # for error, show popup window with message
+            if successful is not True:
+                return QMessageBox.critical(window, "Error", data)
+
+
+            # for getCourse, clear list and show results
+            if requestName == REQUEST_COURSES_COMMAND:
+                if data is not None:
+                    listWidget.clear()
+
+                    courses = data
+                    for course in courses:
+                        currentItem = QListWidgetItem(course)
+                        currentItem.setFont(font)
+                        listWidget.addItem(currentItem)   
+                    
+                    listWidget.repaint()
+
+            # for getClassDetails, show popup window with text
+            if requestName == REQUEST_CLASS_DETAILS_COMMAND:
+                if data is not None:
+                    classDetails = data
+                    return QMessageBox.information(window, "Class Details", classDetails)
+
+
+    timer = QTimer()
+    timer.timeout.connect(pollQueue)
+    timer.setInterval(100) # milliseconds
+    timer.start()
+    #-------------------------------------------------------------------
+
     window.show()
 
+    submitSlot()  # Populate list of courses initially.
 
-    # GET COURSES
-    #initial call
-    updateList("")  
-
+    # Start the event loop.
     exit(app.exec_())
 
 if __name__ == '__main__':

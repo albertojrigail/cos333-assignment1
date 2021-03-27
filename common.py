@@ -1,17 +1,23 @@
 #!/usr/bin/env python
 
 #-----------------------------------------------------------------------
-# getcourse.py
+# common.py
 # Author: Alberto Rigail
 #-----------------------------------------------------------------------
 
-from sys import argv, stderr, exit
 from database import Database
-from course import Course
-import argparse
 
 #-----------------------------------------------------------------------
+def getClassDetails(classId):      
+    # no exceptions would be caught here
+    # exceptions caught in caller program (regserver.py)
+    db = Database()
+    db.connect()
+    currentClass = db.searchClass(classId)
+    db.disconnect()
+    return str(currentClass)
 
+#-----------------------------------------------------------------------
 def getCourse(args):       
     # parse arguments
     if args == "":
@@ -35,3 +41,4 @@ def getCourse(args):
         coursesStrings.append(str(course))
     db.disconnect()
     return coursesStrings
+

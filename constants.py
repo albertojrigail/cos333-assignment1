@@ -1,3 +1,7 @@
+# Commands
+REQUEST_COURSES_COMMAND = "getOverviews"
+REQUEST_CLASS_DETAILS_COMMAND = "getDetail"
+
 # codes
 SUCCESS_CODE=200
 ERROR_CODE=400
