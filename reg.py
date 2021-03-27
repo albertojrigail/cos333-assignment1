@@ -144,7 +144,7 @@ def main(argv):
         item = listWidget.currentItem()
         text = str(item.text())
         row = text.split(' ')
-        classId = int(row[1])
+        classId = row[1]
 
         if workerThread is not None:
             workerThread.stop()
