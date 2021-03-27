@@ -46,8 +46,6 @@ def handleError(sock, exception):
    
     if textList[0] == "database" or textList[0] == "file":
         dump([ERROR_CODE, DATABASE_ERROR_MESSAGE], outFlo)
-    elif textList[0] == "no" and textList[1] == "such" and textList[2] == "table":
-        dump([ERROR_CODE, DATABASE_ERROR_MESSAGE], outFlo)
     elif textList[0] == "no" and textList[1] == "class":
         dump([ERROR_CODE, CLASSID_ERROR_MESSAGE], outFlo)
     # I can cause this code to execute only by making the client erroneous.
@@ -136,11 +134,9 @@ def main(argv):
             sock.close()
             print('Closed socket in parent process')
     
-    # I can cause this code to execute only by making the client erroneous.
     except Exception as e:
         # I can cause this code to execute only by making the client erroneous.
         print(e, file=stderr)
-        # I can cause this code to execute only by making the client erroneous.
         exit(1)
 
 #-----------------------------------------------------------------------

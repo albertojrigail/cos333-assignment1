@@ -20,17 +20,14 @@ def getClassDetails(classId):
 #-----------------------------------------------------------------------
 def getCourse(args):       
     # parse arguments
-    if args == "":
-        arguments = [None]*4
-    else:
-        argv = args.split(",")
-        arguments = []
-        for arg in argv:
-            if arg == "":
-                arguments.append(None)
-            else:
-                arguments.append(arg)
-    
+    argv = args.split(",")
+    arguments = []
+    for arg in argv:
+        if arg == "":
+            arguments.append(None)
+        else:
+            arguments.append(arg)
+
     # no exception catching here
     # exceptions would be catched by regserver.py
     db = Database()
