@@ -5,8 +5,7 @@
 # Author: Bob Dondero
 #-----------------------------------------------------------------------
 from sys import exit, argv, stderr
-from getcourse import getCourse
-from getclassdetails import getClassDetails
+from database import Database
 from constants import *
 
 #Flask-specific imports
@@ -33,7 +32,11 @@ def index():
     # database
     courses=None
     try:
-        courses = getCourse(arguments)
+        db = Database()
+        db.connect()
+        courses = db.searchCourses(arguments)
+        db.disconnect()
+
     except Exception as e:
         isError = True
         error = str(e)
@@ -96,7 +99,10 @@ def regdetails():
     # non-existing integer classId
     if isError == False:
         try:
-            classDetails = getClassDetails(classId)
+            db = Database()
+            db.connect()
+            classDetails = db.searchClass(classId)
+            db.disconnect()
 
         except Exception as e:
             isError = True
