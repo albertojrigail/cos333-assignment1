@@ -38,7 +38,7 @@ def index():
         title =""
     
     # pass the arguments to jinja2
-    html = render_template('templates/index.html',
+    html = render_template('index.html',
         dept=dept,
         num=num,
         area=area,
@@ -93,7 +93,7 @@ def regdetails():
             
 
     # pass the arguments to Jinja2 and render template,
-    html = render_template('templates/regdetails.html',
+    html = render_template('regdetails.html',
         classDetails=classDetails,
         isError=isError,
         errorMsg=errorMsg,
