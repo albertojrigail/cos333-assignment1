@@ -2,13 +2,15 @@ ajrc
 
 Name: Alberto Rigail
 
-Assigment No: 3
+Assigment No: 5
 
 Contribution:
-I worked solo on this assignment, by coding the programs as indicated by the website specifications. Since my code from the previous assignment was modular and had clear comments, I focused entirely on the main Flask logic. I could leverage the database access functions in database.py and getCourse.py and getClassDetails.py, including other classes. First, my code from runserver.py was super similar to the one provided in lecture, since all my routes are defined in regserver.py.
-
-Regserver.py contains most of the logic of my code, with two main methods index() and regdetails(). These two functions support all the main application use cases by calling external modules, as well as the error handling, as described in the course website.
-
+I worked solo on this assignment by coding the programs as indicated by the website specifications.
+My code from the previous assignment was modularity, so adding JQuery and Bootstrap was not difficult.
+I modified the server file regserver.py by adding an additional endpoint that only returns the html for the courses, as requested by index.html which uses javascript and Jquery for that purpose.
+Additionally, I deleted the submit button from index.html and made it responsive and nicer by using Bootstrap.
+For regdetails.html, I deleted the another search link, and made it responsive and nicer with Boostrap.
+Most of the remaining code was described in the readme for previous assignments.
 
 External help:
 I received no external help in this assignment.
@@ -22,10 +24,8 @@ https://www.javatpoint.com/jquery-change#:~:text=%E2%86%92%20%E2%86%90%20prev-,j
 - For Boostrap column layouts (used for displaying the course results), I used the following source:
 https://getbootstrap.com/docs/4.0/content/tables/
 
-
-
-
-Time spent in this assignment: 6 hours
+Time spent in this assignment: 5 hours
 
 My assessment:
-This assignment helped me to internalize learning from lectures in Flask and Jinja2, since watching the lectures is not enough. I believe that coding a website myself, using an MVC architecture, is essential for my future web development endeavors. I believe this assignment is perfect and nothing should be changed for future years.
+This assignment helped me to apply my knowledge of Javascript, AJAX, and Boostrap for making web applications with consistent page states and responsiveness.
+It has been really useful to practice these skills since I can apply them for my final project.
