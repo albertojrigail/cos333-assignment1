@@ -15,12 +15,15 @@ I received no external help in this assignment.
 
 Sources referenced:
 In this assignment, I followed the course policies and guidelines for referencing external information. Moreover, I used the following sources:
-- Flask, Jinja2, and coverage documentation
-- https://docs.python.org/3/tutorial/errors.html
-- https://stackoverflow.com/questions/48169611/how-to-use-conditional-if-statements-in-jinja-2
-- https://coverage.readthedocs.io/en/coverage-4.5.1x/cmd.html
-- https://flask.palletsprojects.com/en/1.1.x/tutorial/layout/
-- https://pythonhow.com/add-css-to-flask-website/
+- The first source helped me to figure out submitting the form after changing the text
+https://www.javatpoint.com/jquery-change#:~:text=%E2%86%92%20%E2%86%90%20prev-,jQuery%20change(),boxes%20and%20elements.
+- Most of the boostrap code had as a reference the PennyBoostrap application from this course
+- Most of the jquery/ajax code had as a reference the PennyJQuery application from this course
+- For Boostrap column layouts (used for displaying the course results), I used the following source:
+https://getbootstrap.com/docs/4.0/content/tables/
+
+
+
 
 Time spent in this assignment: 6 hours
 

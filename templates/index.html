@@ -2,85 +2,125 @@
  <html>
    <head>
       <title>Registrar's Office Class Search</title>
+
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+           
    </head>
    <body>
-      <!--Header-->
-      <h1>Registrar's Office</h1>
-      
-      {%- if isError == True -%}
-      {{errorMsg}}
-      {% else %}
-      <h2>Class Search</h2>
-      <hr>
-      <!--Form questions-->
-      <div class="line">
-          <form method="get">
-              <table>
-                  <tr>
-                      <th style="text-align: right;font-weight: normal;">Dept:</th>
-                      <th>
-                          <input type="text" name="dept" value="{{dept}}" style="border:1px solid;background-color: white;border-radius: 2px;border-color:gray;height: 17.5px;">
-                      </th>
-                  </tr>
-                  <tr>
-                      <th style="text-align: right;font-weight: normal;">Number:</th>
-                      <th>
-                          <input type="text" name="num" value="{{num}}" style="border:1px solid;background-color: white;border-radius: 2px;border-color:gray;height: 17.5px;">
-                      </th>
-                  </tr>
-                  <tr>
-                      <th style="text-align: right;font-weight: normal;">Area:</th>
-                      <th>
-                          <input type="text" name="area" value="{{area}}" style="border:1px solid;background-color: white;border-radius: 2px;border-color:gray;height: 17.5px;">
-                      </th>
-                  </tr>
-                  <tr>
-                      <th style="text-align: right;font-weight: normal;">Title:</th>
-                      <th>
-                          <input type="text" name="title" value="{{title}}" style="border:1px solid;background-color: white;border-radius: 2px;border-color:gray;height: 17.5px;">
-                      </th>
-                  </tr>
-                  <tr>
-                      <th></th>
-                      <th style="align-items: left; text-align:left;">
-                          <input type="submit" value="Submit" style="font-size: 12.5px;">
-                      </th>
-                  </tr>
-              </table> 
-            </form>
-            <hr>
-        </div>
-
-      <!--Search results-->
-      <div>
-          <table>
+    <div class="container bg-primary">
+        <center>
+            <h1>Registrar's Office: Class Search</h1>
+                <div class="row justify-content-center text-center">
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="dept" value="{{dept}}" placeholder="Department">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="num" value="{{num}}" placeholder="Number">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="area" value="{{area}}" placeholder="Area">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="title" value="{{title}}" placeholder="Title">
+                    </div>
+                    <br>
+                </div>
+            <br>
+        </center>
+     </div>
+     <div class="container">
+         <!--Search results-->
+         <table class="table table-sm">
+            <thead>
               <tr>
-                  <th style="text-align: left;">ClassId</th>
-                  <th style="text-align: left;">Dept</th>
-                  <th style="text-align: left;">Num</th>
-                  <th style="text-align: left;">Area</th>
-                  <th style="text-align: left;">Title</th>
-                </tr>
-                {%    for course in courses: %}
-                <tr>
-                    <th style="text-align: left;font-weight: normal;"><a href="/regdetails?classid={{course.getClassId()}}">{{course.getClassId()}}</a></th>
-                    <th style="text-align: left;font-weight: normal;">{{course.getDept()}}</th>
-                    <th style="text-align: left;font-weight: normal;">{{course.getCrsNum()}}</th>
-                    <th style="text-align: left;font-weight: normal;">{{course.getArea()}}</th>
-                    <th style="text-align: left;font-weight: normal;">{{course.getTitle()}}</th>
-                </tr>
-                {%    endfor %}
+                <th scope="col">ClassId</th>
+                <th scope="col">Dept</th>
+                <th scope="col">Num</th>
+                <th scope="col">Area</th>
+                <th scope="col">Title</th>
+              </tr>
+            </thead>
+            <tbody id="resultsParagraph">
+            </tbody>
           </table>
-      </div>
-      {%- endif %}
+     </div>
 
       <!--Footer-->
-      <div class="line">
-        <hr>
-        Created by <a href="https://www.cs.princeton.edu/~rdondero">
-        Bob Dondero</a>
-        <hr>
-      </div>
+      <div class="container bg-info">
+        <center>
+           Created by <a
+           href="http://www.cs.princeton.edu/~rdondero">
+           Bob Dondero</a>
+        </center>
+     </div>
+
+    <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js">
+      </script>
+
+    <script>
+        'use strict';
+
+        function handleResponse(response)
+         { 
+            $('#resultsParagraph').html(response);
+         }
+          
+         let request = null;
+         
+         function getResults()
+         {    
+            let dept = $('#dept').val();
+            let num = $('#num').val();
+            let area = $('#area').val();
+            let title = $('#title').val();
+            dept = encodeURIComponent(dept);
+            num = encodeURIComponent(num);
+            area = encodeURIComponent(area);
+            title = encodeURIComponent(title);
+
+            let url = '/courses?'
+            // append all the parameters
+            if (dept !== null && dept !== "") url += "dept=" + dept + "&";
+            if (num !== null && num !== "") url += "num=" + num + "&";
+            if (area !== null && area !== "") url += "area=" + area + "&";
+            if (title !== null && title !== "") url += "title=" + title + "&";
+
+            // check that the last character is not ? or &
+            let n = url.length;
+            let c = url.charAt(n - 1);
+            if(c === '?' || c === '&') {
+                url = url.substring(0, n - 1);
+            }
+            console.log("Request: " + url);
+
+            if (request != null)
+               request.abort();
+            
+            request = $.ajax(
+               {
+                  type: 'GET',
+                  url: url,
+                  success: handleResponse
+               }
+            );
+         }
+         
+         function setup()
+         {
+            $('#dept').focus();
+            $("#dept").on('input',getResults);
+            $("#num").on('input',getResults);
+            $("#area").on('input',getResults);
+            $("#title").on('input',getResults);
+            getResults();
+         }
+         
+         $('document').ready(setup); 
+        </script>
    </body>
  </html>
 
